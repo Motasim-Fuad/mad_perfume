@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
+import 'package:madperfume/core/constants/app_sizes.dart';
 import 'package:madperfume/features/loyalty/data/models/points_entry.dart';
 import 'package:madperfume/features/loyalty/presentation/controllers/loyalty_controller.dart';
 import 'package:madperfume/shared/widgets/brand_chrome.dart';
@@ -16,7 +17,7 @@ class LoyaltyPage extends GetView<LoyaltyController> {
       child: Obx(() {
         final points = controller.session.points.value;
         return ListView(
-          padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+          padding: const EdgeInsets.fromLTRB(20, 12, 20, AppSizes.navClearance),
           children: [
             Center(
               child: Text(

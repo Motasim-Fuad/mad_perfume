@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
+import 'package:madperfume/core/constants/app_sizes.dart';
 import 'package:madperfume/features/profile/presentation/controllers/profile_controller.dart';
 import 'package:madperfume/features/profile/presentation/widgets/order_history_card.dart';
 import 'package:madperfume/shared/widgets/brand_chrome.dart';
@@ -18,7 +19,7 @@ class ProfilePage extends GetView<ProfileController> {
       child: Obx(() {
         final recent = controller.recentOrders;
         return ListView(
-          padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+          padding: const EdgeInsets.fromLTRB(20, 12, 20, AppSizes.navClearance),
           children: [
             Center(
               child: Text(

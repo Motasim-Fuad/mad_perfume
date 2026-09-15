@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
+import 'package:madperfume/core/constants/app_sizes.dart';
 import 'package:madperfume/features/products/presentation/controllers/category_controller.dart';
 import 'package:madperfume/features/products/presentation/widgets/collection_banner.dart';
 
@@ -13,7 +14,7 @@ class CategoryPage extends GetView<CategoryController> {
     return SafeArea(
       bottom: false,
       child: ListView(
-        padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+        padding: const EdgeInsets.fromLTRB(20, 12, 20, AppSizes.navClearance),
         children: [
           Text(
             'product_category'.tr,

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:madperfume/config/routes/app_routes.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
+import 'package:madperfume/core/constants/app_sizes.dart';
 import 'package:madperfume/features/home/presentation/controllers/home_controller.dart';
 import 'package:madperfume/features/home/presentation/widgets/boutique_preview.dart';
 import 'package:madperfume/features/home/presentation/widgets/collection_strip.dart';
@@ -89,7 +90,7 @@ class HomePage extends GetView<HomeController> {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 28, 20, 24),
+              padding: const EdgeInsets.fromLTRB(20, 28, 20, AppSizes.navClearance),
               child: BoutiquePreview(
                 branches: controller.boutiques,
                 onViewAll: controller.openBranches,

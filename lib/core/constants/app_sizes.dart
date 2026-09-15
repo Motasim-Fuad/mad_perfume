@@ -7,4 +7,5 @@ class AppSizes {
   static const double buttonHeight = 54;
   static const double fieldHeight = 54;
   static const double navHeight = 78;
+  static const double navClearance = 108;
 }

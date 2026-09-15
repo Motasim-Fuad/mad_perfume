@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
+import 'package:madperfume/core/constants/app_sizes.dart';
 import 'package:madperfume/features/cart/presentation/controllers/cart_controller.dart';
 import 'package:madperfume/features/cart/presentation/widgets/cart_line_item.dart';
 import 'package:madperfume/shared/widgets/brand_chrome.dart';
@@ -57,7 +58,7 @@ class CartPage extends GetView<CartController> {
                     ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+              padding: const EdgeInsets.fromLTRB(20, 8, 20, AppSizes.navClearance),
               child: Column(
                 children: [
                   Row(

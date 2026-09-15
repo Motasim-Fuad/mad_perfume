@@ -11,7 +11,9 @@ class CustomBottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<ShellController>();
-    return Obx(() {
+    return Material(
+      type: MaterialType.transparency,
+      child: Obx(() {
       return SafeArea(
         top: false,
         child: Padding(
@@ -74,7 +76,8 @@ class CustomBottomNav extends StatelessWidget {
           ),
         ),
       );
-    });
+      }),
+    );
   }
 }
 
