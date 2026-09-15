@@ -109,25 +109,22 @@ class HomeSearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<HomeController>();
-    return TextField(
-      onChanged: (value) => controller.query.value = value,
-      onSubmitted: (value) {
-        final hits = controller.search();
-        if (hits.isNotEmpty) {
-          Get.toNamed(AppRoutes.productDetails, arguments: hits.first.id);
-        }
-      },
-      decoration: InputDecoration(
-        hintText: 'search_hint'.tr,
-        hintStyle: GoogleFonts.dmSans(fontSize: 13, color: AppColors.muted),
-        prefixIcon: const Icon(Icons.search, color: AppColors.muted),
-        filled: true,
-        fillColor: AppColors.surface,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(28),
-          borderSide: BorderSide.none,
+    return GestureDetector(
+      onTap: () => Get.toNamed(AppRoutes.search),
+      child: AbsorbPointer(
+        child: TextField(
+          decoration: InputDecoration(
+            hintText: 'search_hint'.tr,
+            hintStyle: GoogleFonts.dmSans(fontSize: 13, color: AppColors.muted),
+            prefixIcon: const Icon(Icons.search, color: AppColors.muted),
+            filled: true,
+            fillColor: AppColors.surface,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(28),
+              borderSide: BorderSide.none,
+            ),
+          ),
         ),
       ),
     );

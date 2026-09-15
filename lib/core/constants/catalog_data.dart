@@ -249,7 +249,7 @@ class CatalogData {
       volume: '50ML / 1.7 OZ EDP',
       featured: true,
       imageUrl:
-          'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
+          'https://images.pexels.com/photos/3059609/pexels-photo-3059609.jpeg?auto=compress&cs=tinysrgb&w=1400',
       description:
           'Midnight woods pressed into smoked leather. A signature for those who collect silence as much as scent.',
       tags: ['LEATHER', 'SMOKE', 'AMBER'],
@@ -339,7 +339,7 @@ class CatalogData {
       volume: '100ML / 3.4 OZ EDP',
       featured: true,
       imageUrl:
-          'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
+          'https://images.pexels.com/photos/965989/pexels-photo-965989.jpeg?auto=compress&cs=tinysrgb&w=1400',
       description: 'Black cedar and vetiver under a veil of cool iris. Night architecture in scent.',
       tags: ['CEDAR', 'IRIS', 'VETIVER'],
       rating: 4.8,
@@ -362,7 +362,7 @@ class CatalogData {
       volume: '100ML / 3.4 OZ EDP',
       featured: true,
       imageUrl:
-          'https://images.unsplash.com/photo-1458538977777-1989d66997d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
+          'https://images.pexels.com/photos/1961795/pexels-photo-1961795.jpeg?auto=compress&cs=tinysrgb&w=1400',
       description: 'Neroli honeyed by sunlight, blooming into warm jasmine absolute.',
       tags: ['NEROLI', 'JASMINE', 'HONEY'],
       rating: 4.7,

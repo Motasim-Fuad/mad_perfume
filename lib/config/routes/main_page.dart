@@ -11,6 +11,8 @@ import 'package:madperfume/features/auth/presentation/pages/splash_page.dart';
 import 'package:madperfume/features/auth/presentation/pages/welcome_page.dart';
 import 'package:madperfume/features/branches/presentation/pages/branches_page.dart';
 import 'package:madperfume/features/cart/presentation/pages/checkout_page.dart';
+import 'package:madperfume/features/home/presentation/controllers/product_search_controller.dart';
+import 'package:madperfume/features/home/presentation/pages/search_page.dart';
 import 'package:madperfume/features/loyalty/presentation/pages/loyalty_extra_pages.dart';
 import 'package:madperfume/features/notifications/presentation/pages/notifications_page.dart';
 import 'package:madperfume/features/orders/presentation/pages/order_pages.dart';
@@ -26,13 +28,28 @@ class AppPages {
   AppPages._();
 
   static final pages = <GetPage<dynamic>>[
-    GetPage(name: AppRoutes.splash, page: SplashPage.new, binding: SplashBinding()),
+    GetPage(
+      name: AppRoutes.splash,
+      page: SplashPage.new,
+      binding: SplashBinding(),
+      transition: Transition.fade,
+    ),
     GetPage(name: AppRoutes.welcome, page: WelcomePage.new, binding: ThemeBinding()),
     GetPage(name: AppRoutes.login, page: LoginPage.new, binding: AuthBinding()),
     GetPage(name: AppRoutes.register, page: RegisterPage.new, binding: AuthBinding()),
     GetPage(name: AppRoutes.forgotPassword, page: ForgotPasswordPage.new, binding: AuthBinding()),
     GetPage(name: AppRoutes.resetPassword, page: ResetPasswordPage.new, binding: AuthBinding()),
-    GetPage(name: AppRoutes.main, page: MainShellPage.new, binding: ShellBinding()),
+    GetPage(
+      name: AppRoutes.main,
+      page: MainShellPage.new,
+      binding: ShellBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.search,
+      page: SearchPage.new,
+      binding: ProductSearchBinding(),
+    ),
     GetPage(name: AppRoutes.notifications, page: NotificationsPage.new, binding: NotificationsBinding()),
     GetPage(name: AppRoutes.productList, page: ProductListPage.new, binding: ProductListBinding()),
     GetPage(name: AppRoutes.productDetails, page: ProductDetailsPage.new, binding: ProductDetailsBinding()),

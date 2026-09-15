@@ -14,22 +14,22 @@ class MainShellPage extends GetView<ShellController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Scaffold(
-        backgroundColor: AppColors.background,
-        extendBody: true,
-        body: IndexedStack(
-          index: controller.tabIndex.value,
-          children: const [
-            HomePage(),
-            CategoryPage(),
-            CartPage(),
-            LoyaltyPage(),
-            ProfilePage(),
-          ],
-        ),
-        bottomNavigationBar: const CustomBottomNav(),
+    return Scaffold(
+      backgroundColor: AppColors.background,
+      extendBody: true,
+      body: PageView(
+        controller: controller.pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        onPageChanged: (index) => controller.tabIndex.value = index,
+        children: const [
+          HomePage(),
+          CategoryPage(),
+          CartPage(),
+          LoyaltyPage(),
+          ProfilePage(),
+        ],
       ),
+      bottomNavigationBar: const CustomBottomNav(),
     );
   }
 }

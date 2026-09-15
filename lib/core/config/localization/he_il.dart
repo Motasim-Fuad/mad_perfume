@@ -38,6 +38,7 @@ const Map<String, String> heIl = {
   'hello': 'שלום, יפה',
   'discover_scent': 'גלו את הניחוח שלכם.',
   'search_hint': 'חיפוש בשמים, תווים, מותגים...',
+  'no_results': 'אין תוצאות תואמות',
   'new_collection': 'קולקציה חדשה',
   'all_collection': 'כל הקולקציות',
   'view_all': 'הצג הכל',

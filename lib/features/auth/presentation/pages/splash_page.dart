@@ -30,41 +30,13 @@ class _SplashPageState extends State<SplashPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              width: 168,
-              height: 168,
-              decoration: BoxDecoration(
-                color: AppColors.lilac,
-                borderRadius: BorderRadius.circular(8),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.lilacDeep.withValues(alpha: 0.45),
-                    blurRadius: 28,
-                    offset: const Offset(0, 16),
-                  ),
-                ],
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'MAD',
-                    style: GoogleFonts.cormorantGaramond(
-                      fontSize: 42,
-                      color: Colors.white,
-                      letterSpacing: 6,
-                      height: 1,
-                    ),
-                  ),
-                  Text(
-                    'PARFUMEUR',
-                    style: GoogleFonts.dmSans(
-                      fontSize: 10,
-                      color: Colors.white,
-                      letterSpacing: 3.5,
-                    ),
-                  ),
-                ],
+            ClipRRect(
+              borderRadius: BorderRadius.circular(36),
+              child: Image.asset(
+                'assets/icon/app_icon.png',
+                width: 168,
+                height: 168,
+                fit: BoxFit.cover,
               ),
             ),
             const SizedBox(height: 36),

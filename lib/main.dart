@@ -50,7 +50,8 @@ class MadPerfumeApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      defaultTransition: Transition.cupertino,
+      defaultTransition: Transition.rightToLeftWithFade,
+      transitionDuration: const Duration(milliseconds: 380),
       getPages: AppPages.pages,
       initialRoute: AppRoutes.splash,
       builder: (context, child) {

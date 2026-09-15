@@ -39,6 +39,7 @@ const Map<String, String> enUs = {
   'hello': 'Hello, Beautiful',
   'discover_scent': 'Discover your scent.',
   'search_hint': 'Search for perfumes, notes, brands...',
+  'no_results': 'No matching scents',
   'new_collection': 'NEW COLLECTION',
   'all_collection': 'All Collection',
   'view_all': 'VIEW ALL',

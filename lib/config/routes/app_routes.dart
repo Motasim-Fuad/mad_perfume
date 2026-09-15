@@ -27,6 +27,7 @@ class AppRoutes {
   static const String notificationSettings = '/notification-settings';
   static const String savedItems = '/saved-items';
   static const String allOrders = '/all-orders';
+  static const String search = '/search';
   static const String branches = '/branches';
   static const String branchDetails = '/branch-details';
 }

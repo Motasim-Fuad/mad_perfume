@@ -25,22 +25,12 @@ class LoginPage extends GetView<AuthController> {
                 child: Column(
                   children: [
                     const SizedBox(height: 24),
-                    Container(
-                      width: 92,
-                      height: 92,
-                      decoration: const BoxDecoration(
-                        color: AppColors.lilac,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Center(
-                        child: Text(
-                          'MAD',
-                          style: GoogleFonts.cormorantGaramond(
-                            color: Colors.white,
-                            fontSize: 22,
-                            letterSpacing: 2,
-                          ),
-                        ),
+                    ClipOval(
+                      child: Image.asset(
+                        'assets/icon/app_icon.png',
+                        width: 92,
+                        height: 92,
+                        fit: BoxFit.cover,
                       ),
                     ),
                     const SizedBox(height: 28),

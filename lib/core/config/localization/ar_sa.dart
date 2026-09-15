@@ -38,6 +38,7 @@ const Map<String, String> arSa = {
   'hello': 'مرحباً، الجميلة',
   'discover_scent': 'اكتشف عطرك.',
   'search_hint': 'ابحث عن عطور، نوتات، علامات...',
+  'no_results': 'لا توجد نتائج',
   'new_collection': 'مجموعة جديدة',
   'all_collection': 'كل المجموعات',
   'view_all': 'عرض الكل',

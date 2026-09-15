@@ -105,32 +105,41 @@ class _Item extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 220),
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: selected ? AppColors.ink : Colors.transparent,
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                icon,
-                size: 20,
-                color: selected ? AppColors.surface : AppColors.inkSoft,
+            AnimatedScale(
+              scale: selected ? 1.08 : 1,
+              duration: const Duration(milliseconds: 280),
+              curve: Curves.easeOutBack,
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 280),
+                curve: Curves.easeOutCubic,
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: selected ? AppColors.ink : Colors.transparent,
+                  shape: BoxShape.circle,
+                ),
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 220),
+                  child: Icon(
+                    icon,
+                    key: ValueKey('$index-$selected'),
+                    size: 20,
+                    color: selected ? AppColors.surface : AppColors.inkSoft,
+                  ),
+                ),
               ),
             ),
-            const SizedBox(height: 2),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 2),
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Text(
-                  label,
-                  maxLines: 1,
-                  style: GoogleFonts.dmSans(
-                    fontSize: 10,
-                    fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
-                    color: AppColors.ink,
-                  ),
+            AnimatedDefaultTextStyle(
+              duration: const Duration(milliseconds: 220),
+              style: GoogleFonts.dmSans(
+                fontSize: 10,
+                fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+                color: AppColors.ink,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 2),
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(label, maxLines: 1),
                 ),
               ),
             ),
