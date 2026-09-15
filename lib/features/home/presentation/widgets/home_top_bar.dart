@@ -46,7 +46,7 @@ class HomeTopBar extends StatelessWidget {
                   height: 32,
                   child: RemoteImage(
                     url: user.value?.avatarUrl ??
-                        'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80',
+                        'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
                     label: 'profile image here',
                   ),
                 ),

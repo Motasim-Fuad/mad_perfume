@@ -6,7 +6,7 @@ class UserModel {
     required this.phone,
     this.password = '',
     this.avatarUrl =
-        'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80',
+        'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
     this.address = '68 Place Vendome, 75001 Paris, France',
   });
 

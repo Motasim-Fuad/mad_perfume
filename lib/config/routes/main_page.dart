@@ -17,6 +17,7 @@ import 'package:madperfume/features/orders/presentation/pages/order_pages.dart';
 import 'package:madperfume/features/products/presentation/bindings/products_binding.dart';
 import 'package:madperfume/features/products/presentation/pages/product_details_page.dart';
 import 'package:madperfume/features/products/presentation/pages/product_list_page.dart';
+import 'package:madperfume/features/profile/presentation/pages/all_orders_page.dart';
 import 'package:madperfume/features/profile/presentation/pages/settings_pages.dart';
 import 'package:madperfume/features/shell/presentation/bindings/shell_binding.dart';
 import 'package:madperfume/features/shell/presentation/pages/main_shell_page.dart';
@@ -50,6 +51,7 @@ class AppPages {
     GetPage(name: AppRoutes.security, page: SecurityPage.new, binding: SecurityBinding()),
     GetPage(name: AppRoutes.notificationSettings, page: NotificationSettingsPage.new, binding: NotificationSettingsBinding()),
     GetPage(name: AppRoutes.savedItems, page: SavedItemsPage.new),
+    GetPage(name: AppRoutes.allOrders, page: AllOrdersPage.new),
     GetPage(name: AppRoutes.branches, page: BranchesPage.new, binding: BranchesBinding()),
     GetPage(name: AppRoutes.branchDetails, page: BranchDetailsPage.new, binding: BranchDetailsBinding()),
   ];

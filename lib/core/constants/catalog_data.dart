@@ -138,7 +138,7 @@ class CatalogData {
       heroLabel: 'FLORAL',
       earnPoints: 80,
       imageUrl:
-          'https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1490750967868-88aa4486c946?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     ),
     CollectionEntity(
       id: 'woody',
@@ -146,7 +146,7 @@ class CatalogData {
       heroLabel: 'WOODY',
       earnPoints: 110,
       imageUrl:
-          'https://images.unsplash.com/photo-1542326237-94b1c5a538d4?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     ),
     CollectionEntity(
       id: 'oriental',
@@ -154,7 +154,7 @@ class CatalogData {
       heroLabel: 'ORIENTAL',
       earnPoints: 140,
       imageUrl:
-          'https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1615634260167-c8cdede054de?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     ),
     CollectionEntity(
       id: 'fresh',
@@ -162,7 +162,7 @@ class CatalogData {
       heroLabel: 'FRESH CITRUS',
       earnPoints: 60,
       imageUrl:
-          'https://images.unsplash.com/photo-1550828480-6c5e0d0c2b0a?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1582979512210-99b6a53386f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     ),
     CollectionEntity(
       id: 'leather',
@@ -170,7 +170,7 @@ class CatalogData {
       heroLabel: 'LEATHER',
       earnPoints: 95,
       imageUrl:
-          'https://images.unsplash.com/photo-1523293182086-7651a49978fd?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1523293182086-7651a49978fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     ),
     CollectionEntity(
       id: 'gourmand',
@@ -178,7 +178,7 @@ class CatalogData {
       heroLabel: 'GOURMAND',
       earnPoints: 70,
       imageUrl:
-          'https://images.unsplash.com/photo-1481391319762-47dff72954d9?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1481391319762-47dff72954d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     ),
   ];
 
@@ -195,7 +195,7 @@ class CatalogData {
       volume: '100ML',
       featured: true,
       imageUrl:
-          'https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
       description:
           'A dialogue between shadows and light. Velvet Oud wraps warm woods in a golden, traditional resin of the East to reveal a crystalline, ethereal core.',
       tags: ['OUD NOIR', 'BERGAMOT', 'WHITE MUSK'],
@@ -219,7 +219,7 @@ class CatalogData {
       volume: '50ML',
       featured: true,
       imageUrl:
-          'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1594035910387-fea47794261f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
       description:
           'A dialogue between shadows and light. Oud Minimaliste strips away the heavy, traditional resins of the East to reveal a crystalline, ethereal core. It begins with the sharp, cold clarity of Bergamot, which melts into a heart of Oud, sustainably sourced from Laos that feels like a whisper rather than a shout.\n\nDesigned for the silent observer, this fragrance rests close to the skin, creating an invisible aura of presence. It is the olfactory embodiment of Invisible Elegance: sophisticated, structured, and profoundly understated.',
       tags: ['OUD NOIR', 'BERGAMOT', 'WHITE MUSK'],
@@ -249,7 +249,7 @@ class CatalogData {
       volume: '50ML / 1.7 OZ EDP',
       featured: true,
       imageUrl:
-          'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
       description:
           'Midnight woods pressed into smoked leather. A signature for those who collect silence as much as scent.',
       tags: ['LEATHER', 'SMOKE', 'AMBER'],
@@ -272,7 +272,7 @@ class CatalogData {
       price: 190,
       volume: '50ML / 1.7 OZ EDP',
       imageUrl:
-          'https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1615634260167-c8cdede054de?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
       description: 'A dewy rose garden at dawn, lifted by pale musk and a drop of green pear.',
       tags: ['ROSE', 'MUSK', 'PEAR'],
       rating: 4.7,
@@ -294,7 +294,7 @@ class CatalogData {
       price: 310,
       volume: '50ML / 1.7 OZ EDP',
       imageUrl:
-          'https://images.unsplash.com/photo-1587017539504-67cfbddac569?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1587017539504-67cfbddac569?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
       description: 'Incense, saffron and sun-warmed resin drifting over cool night sand.',
       tags: ['INCENSE', 'SAFFRON', 'SANDALWOOD'],
       rating: 4.9,
@@ -316,7 +316,7 @@ class CatalogData {
       price: 95,
       volume: '15ML / 0.5 OZ EDP',
       imageUrl:
-          'https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
       description: 'A bright citrus spark designed for travel, layered over clean white tea.',
       tags: ['CITRUS', 'TEA', 'AMBROX'],
       rating: 4.6,
@@ -339,7 +339,7 @@ class CatalogData {
       volume: '100ML / 3.4 OZ EDP',
       featured: true,
       imageUrl:
-          'https://images.unsplash.com/photo-1595425970377-c9703cf48ce3?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
       description: 'Black cedar and vetiver under a veil of cool iris. Night architecture in scent.',
       tags: ['CEDAR', 'IRIS', 'VETIVER'],
       rating: 4.8,
@@ -362,7 +362,7 @@ class CatalogData {
       volume: '100ML / 3.4 OZ EDP',
       featured: true,
       imageUrl:
-          'https://images.unsplash.com/photo-1458538977777-1989d66997d0?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1458538977777-1989d66997d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
       description: 'Neroli honeyed by sunlight, blooming into warm jasmine absolute.',
       tags: ['NEROLI', 'JASMINE', 'HONEY'],
       rating: 4.7,
@@ -384,7 +384,7 @@ class CatalogData {
       price: 210,
       volume: '100ML / EAU DE PARFUM',
       imageUrl:
-          'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=900&q=80',
+          'https://images.unsplash.com/photo-1594035910387-fea47794261f?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80',
       description: 'A private collection oud, dense yet airy, built for slow evenings.',
       tags: ['OUD', 'ROSE', 'AMBER'],
       rating: 4.9,
@@ -406,7 +406,7 @@ class CatalogData {
       price: 170,
       volume: '50ML / ESSENTIAL',
       imageUrl:
-          'https://images.unsplash.com/photo-1547887538-363ea4662cda?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1547887538-363ea4662cda?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
       description: 'Pressed bergamot over steamed white tea and a cool mineral musk.',
       tags: ['BERGAMOT', 'TEA', 'MUSK'],
       rating: 4.5,
@@ -428,7 +428,7 @@ class CatalogData {
       price: 45,
       volume: '30ML / ESSENTIAL',
       imageUrl:
-          'https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&w=900&q=80',
+          'https://images.unsplash.com/photo-1615634260167-c8cdede054de?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80',
       description: 'A concentrated jasmine soliflore for layering after dusk.',
       tags: ['JASMINE', 'INDOLE', 'SANDAL'],
       rating: 4.4,
@@ -450,7 +450,7 @@ class CatalogData {
       price: 95,
       volume: 'SCENTED CANDLE / 300G',
       imageUrl:
-          'https://images.unsplash.com/photo-1602607628144-c4f5ee5d1d14?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1603006905003-be475563bc59?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
       description: 'A candle of tuberose, tonka and warm waxed woods for the atelier at home.',
       tags: ['TUBEROSE', 'TONKA', 'WOOD'],
       rating: 4.6,
@@ -490,7 +490,7 @@ class CatalogData {
       email: 'mayfair@madperfume.com',
       openUntil: '20:00 PM',
       imageUrl:
-          'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     ),
     BranchEntity(
       id: 'marais',
@@ -502,7 +502,7 @@ class CatalogData {
       email: 'marais@madperfume.com',
       openUntil: '19:00 PM',
       imageUrl:
-          'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     ),
     BranchEntity(
       id: 'ginza',
@@ -514,7 +514,7 @@ class CatalogData {
       email: 'ginza@madperfume.com',
       openUntil: '21:00 PM',
       imageUrl:
-          'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     ),
     BranchEntity(
       id: 'montenapoleone',
@@ -526,7 +526,7 @@ class CatalogData {
       email: 'milan@madperfume.com',
       openUntil: '19:30 PM',
       imageUrl:
-          'https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     ),
     BranchEntity(
       id: 'soho',
@@ -538,7 +538,7 @@ class CatalogData {
       email: 'soho@madperfume.com',
       openUntil: '20:00 PM',
       imageUrl:
-          'https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     ),
     BranchEntity(
       id: 'champs',
@@ -550,7 +550,7 @@ class CatalogData {
       email: 'champselysees@madperfume.com',
       openUntil: '20:00 PM',
       imageUrl:
-          'https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     ),
   ];
 
@@ -566,7 +566,7 @@ class CatalogData {
       collectionId: 'oriental',
       subtitle: 'ACCESS TO THE RESERVE',
       imageUrl:
-          'https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
       description:
           'Access our most exclusive vintage, aged for three years in sustainable oak casks. A singular scent for true connoisseurs.',
       howToUse: [
@@ -582,7 +582,7 @@ class CatalogData {
       collectionId: 'floral',
       subtitle: 'CURATED SAMPLING',
       imageUrl:
-          'https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
       description: 'A curated voyage of niche fragrances, housed in a lacquered atelier case.',
       howToUse: [
         'Redeem in the app',
@@ -597,7 +597,7 @@ class CatalogData {
       collectionId: 'gourmand',
       subtitle: 'ATELIER FINISHING',
       imageUrl:
-          'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
       description: 'Hand-finished silk ribbon and wax seal, reserved for three pieces in your next dispatch.',
       howToUse: [
         'Apply at checkout on your next order',
@@ -612,7 +612,7 @@ class CatalogData {
       collectionId: 'gourmand',
       subtitle: 'HOME RITUAL',
       imageUrl:
-          'https://images.unsplash.com/photo-1602607628144-c4f5ee5d1d14?auto=format&fit=crop&w=1400&q=80',
+          'https://images.unsplash.com/photo-1603006905003-be475563bc59?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
       description: 'A 300g candle of nocturnal bloom with bergamot and white tea.',
       howToUse: [
         'Redeem and collect in boutique or delivery',
@@ -635,7 +635,7 @@ class CatalogData {
       time: '24 HOURS AGO',
       tag: 'LIMITED EDITION',
       imageUrl:
-          'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1594035910387-fea47794261f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
     ),
     AppNotification(
       id: 'n2',

@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
 import 'package:madperfume/features/profile/presentation/controllers/profile_controller.dart';
+import 'package:madperfume/features/profile/presentation/widgets/order_history_card.dart';
 import 'package:madperfume/shared/widgets/brand_chrome.dart';
+import 'package:madperfume/shared/widgets/custom_button.dart';
 import 'package:madperfume/shared/widgets/empty_widget.dart';
 
 class ProfilePage extends GetView<ProfileController> {
@@ -13,12 +15,15 @@ class ProfilePage extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Obx(() {
-        final orders = controller.orders;
+        final recent = controller.recentOrders;
         return ListView(
           padding: const EdgeInsets.fromLTRB(20, 12, 20, 110),
           children: [
             Center(
-              child: Text('profile'.tr.toUpperCase(), style: GoogleFonts.dmSans(letterSpacing: 3, fontWeight: FontWeight.w700)),
+              child: Text(
+                'profile'.tr.toUpperCase(),
+                style: GoogleFonts.dmSans(letterSpacing: 3, fontWeight: FontWeight.w700),
+              ),
             ),
             Align(
               alignment: AlignmentDirectional.centerEnd,
@@ -27,48 +32,70 @@ class ProfilePage extends GetView<ProfileController> {
                 icon: const Icon(Icons.settings_outlined),
               ),
             ),
-            Text('order_history'.tr, style: GoogleFonts.cormorantGaramond(fontSize: 28, fontWeight: FontWeight.w600)),
-            Text('recent_transactions'.tr, style: GoogleFonts.dmSans(fontSize: 11, letterSpacing: 1.2, color: AppColors.muted)),
+            Text(
+              'order_history'.tr,
+              style: GoogleFonts.cormorantGaramond(fontSize: 28, fontWeight: FontWeight.w600),
+            ),
+            Text(
+              'recent_transactions'.tr,
+              style: GoogleFonts.dmSans(fontSize: 11, letterSpacing: 1.2, color: AppColors.muted),
+            ),
             const SizedBox(height: 12),
-            if (orders.isEmpty) EmptyWidget(message: 'empty_orders'.tr),
-            ...orders.map(
-              (order) => GlossyCard(
-                onTap: () => controller.openOrder(order.id),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(order.id, style: GoogleFonts.dmSans(fontSize: 12, color: AppColors.muted)),
-                          Text(
-                            '${order.createdAt.month}/${order.createdAt.day}/${order.createdAt.year}',
-                            style: GoogleFonts.dmSans(fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                    ),
-                    MoneyText(order.total, size: 14),
-                  ],
+            if (controller.orders.isEmpty) EmptyWidget(message: 'empty_orders'.tr),
+            ...recent.map(
+              (order) => Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: OrderHistoryCard(
+                  order: order,
+                  onTap: () => controller.openOrder(order.id),
                 ),
               ),
             ),
-            const SizedBox(height: 16),
+            if (controller.orders.isNotEmpty) ...[
+              const SizedBox(height: 4),
+              AppButton(
+                label: 'all_orders'.tr,
+                outlined: true,
+                onPressed: controller.openAllOrders,
+              ),
+            ],
+            const SizedBox(height: 22),
+            Text(
+              'others'.tr,
+              style: GoogleFonts.cormorantGaramond(fontSize: 28, fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(height: 12),
             GlossyCard(
               onTap: controller.openSaved,
-              child: Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(child: Text('saved_items_count'.tr, style: GoogleFonts.dmSans(fontWeight: FontWeight.w700))),
-                  Text('${controller.session.wishlist.length}'),
+                  Text(
+                    'saved_items_count'.tr,
+                    style: GoogleFonts.dmSans(fontSize: 11, letterSpacing: 1.2, color: AppColors.muted),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    '${controller.session.wishlist.length}',
+                    style: GoogleFonts.dmSans(fontSize: 22, fontWeight: FontWeight.w700),
+                  ),
                 ],
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 12),
             GlossyCard(
-              child: Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(child: Text('tier_status'.tr, style: GoogleFonts.dmSans(fontWeight: FontWeight.w700))),
-                  Text('platinum'.tr),
+                  Text(
+                    'tier_status'.tr,
+                    style: GoogleFonts.dmSans(fontSize: 11, letterSpacing: 1.2, color: AppColors.muted),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    'platinum'.tr,
+                    style: GoogleFonts.dmSans(fontSize: 22, fontWeight: FontWeight.w700),
+                  ),
                 ],
               ),
             ),

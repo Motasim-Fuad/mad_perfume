@@ -15,7 +15,7 @@ class WelcomeHero extends StatelessWidget {
         children: [
           const RemoteImage(
             url:
-                'https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=1400&q=80',
+                'https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
             label: 'perfume image here',
           ),
           DecoratedBox(

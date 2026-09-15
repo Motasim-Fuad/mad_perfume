@@ -17,6 +17,12 @@ class RemoteImage extends StatelessWidget {
   final String label;
   final BorderRadius? borderRadius;
 
+  static const _headers = {
+    'Accept': 'image/avif,image/webp,image/apng,image/*,*/*;q=0.8',
+    'User-Agent':
+        'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1',
+  };
+
   @override
   Widget build(BuildContext context) {
     final fallback = ColoredBox(
@@ -41,7 +47,18 @@ class RemoteImage extends StatelessWidget {
     final image = CachedNetworkImage(
       imageUrl: url,
       fit: fit,
-      placeholder: (context, url) => fallback,
+      httpHeaders: _headers,
+      fadeInDuration: const Duration(milliseconds: 180),
+      placeholder: (context, url) => const ColoredBox(
+        color: AppColors.surfaceMuted,
+        child: Center(
+          child: SizedBox(
+            width: 18,
+            height: 18,
+            child: CircularProgressIndicator(strokeWidth: 1.6, color: AppColors.muted),
+          ),
+        ),
+      ),
       errorWidget: (context, url, error) => fallback,
     );
     if (borderRadius == null) {

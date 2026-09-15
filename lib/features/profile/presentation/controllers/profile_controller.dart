@@ -11,6 +11,8 @@ class ProfileController extends GetxController {
 
   List<OrderModel> get orders => session.orders;
 
+  List<OrderModel> get recentOrders => orders.take(4).toList();
+
   List<ProductEntity> get saved {
     return CatalogData.products.where((item) => session.wishlist.contains(item.id)).toList();
   }
@@ -18,6 +20,8 @@ class ProfileController extends GetxController {
   void openSettings() => Get.toNamed(AppRoutes.settings);
 
   void openSaved() => Get.toNamed(AppRoutes.savedItems);
+
+  void openAllOrders() => Get.toNamed(AppRoutes.allOrders);
 
   void openOrder(String id) => Get.toNamed(AppRoutes.orderDetails, arguments: id);
 
