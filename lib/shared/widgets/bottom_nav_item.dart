@@ -19,49 +19,55 @@ class BottomNavItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: InkWell(
+      flex: selected ? 4 : 2,
+      child: GestureDetector(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(40),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            AnimatedScale(
-              scale: selected ? 1.08 : 1,
-              duration: const Duration(milliseconds: 280),
-              curve: Curves.easeOutBack,
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 280),
-                curve: Curves.easeOutCubic,
-                padding: const EdgeInsets.all(6),
-                decoration: BoxDecoration(
-                  color: selected ? AppColors.ink : Colors.transparent,
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
+        behavior: HitTestBehavior.opaque,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 480),
+          curve: const Cubic(0.16, 1, 0.3, 1),
+          height: 40,
+          margin: const EdgeInsets.symmetric(horizontal: 2),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          clipBehavior: Clip.hardEdge,
+          decoration: BoxDecoration(
+            color: selected ? AppColors.ink : Colors.transparent,
+            borderRadius: BorderRadius.circular(22),
+          ),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
                   icon,
                   size: 20,
-                  color: selected ? AppColors.surface : AppColors.inkSoft,
+                  color: selected ? AppColors.surface : const Color(0xFF9A8F86),
                 ),
-              ),
-            ),
-            const SizedBox(height: 2),
-            AnimatedDefaultTextStyle(
-              duration: const Duration(milliseconds: 220),
-              style: GoogleFonts.dmSans(
-                fontSize: 10,
-                fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
-                color: AppColors.ink,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2),
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(label, maxLines: 1),
+                AnimatedSize(
+                  duration: const Duration(milliseconds: 480),
+                  curve: const Cubic(0.16, 1, 0.3, 1),
+                  alignment: AlignmentDirectional.centerStart,
+                  child: selected
+                      ? Padding(
+                          padding: const EdgeInsetsDirectional.only(start: 8),
+                          child: Text(
+                            label.toUpperCase(),
+                            maxLines: 1,
+                            softWrap: false,
+                            style: GoogleFonts.dmSans(
+                              fontSize: 11,
+                              letterSpacing: 0.8,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.surface,
+                            ),
+                          ),
+                        )
+                      : const SizedBox(width: 0, height: 20),
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

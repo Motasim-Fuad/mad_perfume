@@ -26,17 +26,25 @@ class ProductListTile extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          Text(
-            product.volume.toUpperCase(),
-            style: GoogleFonts.dmSans(fontSize: 10, letterSpacing: 1.3, color: AppColors.muted),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 6),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  product.volume.toUpperCase(),
+                  style: GoogleFonts.dmSans(fontSize: 10, letterSpacing: 1.3, color: AppColors.muted),
+                ),
+                Text(
+                  product.name,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.cormorantGaramond(fontSize: 22, fontWeight: FontWeight.w600),
+                ),
+                MoneyText(product.price, size: 14),
+              ],
+            ),
           ),
-          Text(
-            product.name,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: GoogleFonts.cormorantGaramond(fontSize: 22, fontWeight: FontWeight.w600),
-          ),
-          MoneyText(product.price, size: 14),
         ],
       ),
     );

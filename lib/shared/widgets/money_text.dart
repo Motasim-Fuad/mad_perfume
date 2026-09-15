@@ -15,11 +15,14 @@ class MoneyText extends StatelessWidget {
   Widget build(BuildContext context) {
     final rtl = Get.find<LocaleService>().isRtl;
     final amount = value.toStringAsFixed(2);
-    return Text(
-      rtl ? '$amount \$' : '\$$amount',
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
-      style: GoogleFonts.dmSans(fontSize: size, fontWeight: weight, color: AppColors.ink),
+    return Padding(
+      padding: const EdgeInsetsDirectional.only(start: 2),
+      child: Text(
+        rtl ? '$amount \$' : '\$$amount',
+        maxLines: 1,
+        overflow: TextOverflow.visible,
+        style: GoogleFonts.dmSans(fontSize: size, fontWeight: weight, color: AppColors.ink),
+      ),
     );
   }
 }

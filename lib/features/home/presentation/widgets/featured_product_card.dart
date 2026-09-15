@@ -18,12 +18,12 @@ class FeaturedProductCard extends StatelessWidget {
     final session = Get.find<SessionStore>();
     return GestureDetector(
       onTap: onTap,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(22),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AspectRatio(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(22),
+            child: AspectRatio(
               aspectRatio: 0.86,
               child: Stack(
                 fit: StackFit.expand,
@@ -55,20 +55,28 @@ class FeaturedProductCard extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 10),
-            Text(
-              product.volume,
-              style: GoogleFonts.dmSans(fontSize: 10, letterSpacing: 1.4, color: AppColors.muted),
+          ),
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 6),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  product.volume,
+                  style: GoogleFonts.dmSans(fontSize: 10, letterSpacing: 1.4, color: AppColors.muted),
+                ),
+                Text(
+                  product.name,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.cormorantGaramond(fontSize: 22, fontWeight: FontWeight.w600),
+                ),
+                MoneyText(product.price, size: 14, weight: FontWeight.w600),
+              ],
             ),
-            Text(
-              product.name,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: GoogleFonts.cormorantGaramond(fontSize: 22, fontWeight: FontWeight.w600),
-            ),
-            MoneyText(product.price, size: 14, weight: FontWeight.w600),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

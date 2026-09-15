@@ -13,65 +13,67 @@ class CustomBottomNav extends StatelessWidget {
     final controller = Get.find<ShellController>();
     return Material(
       type: MaterialType.transparency,
-      child: Obx(() {
-        return SafeArea(
-          top: false,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
-            child: Material(
-              color: Colors.transparent,
-              child: Container(
-                height: AppSizes.navHeight,
-                decoration: BoxDecoration(
-                  color: AppColors.surface,
-                  borderRadius: BorderRadius.circular(40),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.12),
-                      blurRadius: 24,
-                      offset: const Offset(0, 8),
-                    ),
-                  ],
+      child: SafeArea(
+        top: false,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(18, 0, 18, 10),
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: AppColors.surface,
+              borderRadius: BorderRadius.circular(32),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.08),
+                  blurRadius: 22,
+                  offset: const Offset(0, 8),
                 ),
-                child: Row(
-                  children: [
-                    BottomNavItem(
-                      icon: Icons.home_rounded,
-                      label: 'home'.tr,
-                      selected: controller.tabIndex.value == 0,
-                      onTap: () => controller.setTab(0),
-                    ),
-                    BottomNavItem(
-                      icon: Icons.shopping_bag_outlined,
-                      label: 'products'.tr,
-                      selected: controller.tabIndex.value == 1,
-                      onTap: () => controller.setTab(1),
-                    ),
-                    BottomNavItem(
-                      icon: Icons.shopping_cart_outlined,
-                      label: 'cart'.tr,
-                      selected: controller.tabIndex.value == 2,
-                      onTap: () => controller.setTab(2),
-                    ),
-                    BottomNavItem(
-                      icon: Icons.workspace_premium_outlined,
-                      label: 'loyalty'.tr,
-                      selected: controller.tabIndex.value == 3,
-                      onTap: () => controller.setTab(3),
-                    ),
-                    BottomNavItem(
-                      icon: Icons.person_outline,
-                      label: 'profile'.tr,
-                      selected: controller.tabIndex.value == 4,
-                      onTap: () => controller.setTab(4),
-                    ),
-                  ],
+              ],
+            ),
+            child: SizedBox(
+              height: AppSizes.navHeight,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child: Obx(
+                  () => Row(
+                    children: [
+                      BottomNavItem(
+                        icon: Icons.home_outlined,
+                        label: 'home'.tr,
+                        selected: controller.tabIndex.value == 0,
+                        onTap: () => controller.setTab(0),
+                      ),
+                      BottomNavItem(
+                        icon: Icons.shopping_bag_outlined,
+                        label: 'products'.tr,
+                        selected: controller.tabIndex.value == 1,
+                        onTap: () => controller.setTab(1),
+                      ),
+                      BottomNavItem(
+                        icon: Icons.shopping_cart_outlined,
+                        label: 'cart'.tr,
+                        selected: controller.tabIndex.value == 2,
+                        onTap: () => controller.setTab(2),
+                      ),
+                      BottomNavItem(
+                        icon: Icons.workspace_premium_outlined,
+                        label: 'loyalty'.tr,
+                        selected: controller.tabIndex.value == 3,
+                        onTap: () => controller.setTab(3),
+                      ),
+                      BottomNavItem(
+                        icon: Icons.person_outline,
+                        label: 'profile'.tr,
+                        selected: controller.tabIndex.value == 4,
+                        onTap: () => controller.setTab(4),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-        );
-      }),
+        ),
+      ),
     );
   }
 }
