@@ -17,7 +17,7 @@ class LoyaltyPage extends GetView<LoyaltyController> {
       child: Obx(() {
         final points = controller.session.points.value;
         return ListView(
-          padding: const EdgeInsets.fromLTRB(20, 12, 20, AppSizes.navClearance),
+          padding: EdgeInsets.fromLTRB(20, 12, 20, AppSizes.navClearanceOf(context)),
           children: [
             Center(
               child: Text(

@@ -17,9 +17,3 @@ class BranchesController extends GetxController {
 
   void open(String id) => Get.toNamed(AppRoutes.branchDetails, arguments: id);
 }
-
-class BranchDetailsController extends GetxController {
-  BranchDetailsController(this.branch);
-
-  final BranchEntity branch;
-}

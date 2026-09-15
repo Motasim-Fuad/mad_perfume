@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+
 class AppSizes {
   AppSizes._();
 
@@ -7,5 +9,10 @@ class AppSizes {
   static const double buttonHeight = 54;
   static const double fieldHeight = 54;
   static const double navHeight = 78;
-  static const double navClearance = 108;
+  static const double navBottomPad = 8;
+  static const double navGap = 20;
+
+  static double navClearanceOf(BuildContext context) {
+    return navHeight + navBottomPad + navGap + MediaQuery.paddingOf(context).bottom;
+  }
 }

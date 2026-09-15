@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:madperfume/config/routes/app_routes.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
 import 'package:madperfume/core/constants/app_sizes.dart';
 import 'package:madperfume/features/home/presentation/controllers/home_controller.dart';
@@ -9,6 +8,7 @@ import 'package:madperfume/features/home/presentation/widgets/boutique_preview.d
 import 'package:madperfume/features/home/presentation/widgets/collection_strip.dart';
 import 'package:madperfume/features/home/presentation/widgets/featured_product_card.dart';
 import 'package:madperfume/features/home/presentation/widgets/home_hero_carousel.dart';
+import 'package:madperfume/features/home/presentation/widgets/home_search_field.dart';
 import 'package:madperfume/features/home/presentation/widgets/home_top_bar.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -90,7 +90,7 @@ class HomePage extends GetView<HomeController> {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 28, 20, AppSizes.navClearance),
+              padding: EdgeInsets.fromLTRB(20, 28, 20, AppSizes.navClearanceOf(context)),
               child: BoutiquePreview(
                 branches: controller.boutiques,
                 onViewAll: controller.openBranches,
@@ -99,33 +99,6 @@ class HomePage extends GetView<HomeController> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class HomeSearchField extends StatelessWidget {
-  const HomeSearchField({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => Get.toNamed(AppRoutes.search),
-      child: AbsorbPointer(
-        child: TextField(
-          decoration: InputDecoration(
-            hintText: 'search_hint'.tr,
-            hintStyle: GoogleFonts.dmSans(fontSize: 13, color: AppColors.muted),
-            prefixIcon: const Icon(Icons.search, color: AppColors.muted),
-            filled: true,
-            fillColor: AppColors.surface,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(28),
-              borderSide: BorderSide.none,
-            ),
-          ),
-        ),
       ),
     );
   }

@@ -57,27 +57,30 @@ class CartPage extends GetView<CartController> {
                       itemBuilder: (context, index) => CartLineItem(item: items[index]),
                     ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 8, 20, AppSizes.navClearance),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          'subtotal'.tr,
-                          style: GoogleFonts.dmSans(letterSpacing: 1.4, fontWeight: FontWeight.w700),
+            ColoredBox(
+              color: AppColors.background,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(20, 12, 20, AppSizes.navClearanceOf(context)),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            'subtotal'.tr,
+                            style: GoogleFonts.dmSans(letterSpacing: 1.4, fontWeight: FontWeight.w700),
+                          ),
                         ),
-                      ),
-                      MoneyText(session.cartTotal, size: 18),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  AppButton(
-                    label: 'proceed_checkout'.tr,
-                    onPressed: items.isEmpty ? null : controller.checkout,
-                  ),
-                ],
+                        MoneyText(session.cartTotal, size: 18),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    AppButton(
+                      label: 'proceed_checkout'.tr,
+                      onPressed: items.isEmpty ? null : controller.checkout,
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

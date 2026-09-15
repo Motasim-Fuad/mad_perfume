@@ -19,7 +19,7 @@ class ProfilePage extends GetView<ProfileController> {
       child: Obx(() {
         final recent = controller.recentOrders;
         return ListView(
-          padding: const EdgeInsets.fromLTRB(20, 12, 20, AppSizes.navClearance),
+          padding: EdgeInsets.fromLTRB(20, 12, 20, AppSizes.navClearanceOf(context)),
           children: [
             Center(
               child: Text(

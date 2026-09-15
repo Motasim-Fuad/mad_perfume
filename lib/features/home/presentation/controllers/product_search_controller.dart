@@ -22,10 +22,3 @@ class ProductSearchController extends GetxController {
 
   void open(String id) => Get.toNamed(AppRoutes.productDetails, arguments: id);
 }
-
-class ProductSearchBinding extends Bindings {
-  @override
-  void dependencies() {
-    Get.put(ProductSearchController());
-  }
-}

@@ -16,10 +16,3 @@ class AuthBinding extends Bindings {
     }
   }
 }
-
-class SplashBinding extends Bindings {
-  @override
-  void dependencies() {
-    InitialBinding().dependencies();
-  }
-}

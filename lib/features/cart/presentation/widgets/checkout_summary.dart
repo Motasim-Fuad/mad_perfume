@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
-import 'package:madperfume/features/cart/presentation/controllers/cart_controller.dart';
+import 'package:madperfume/features/cart/presentation/controllers/checkout_controller.dart';
 import 'package:madperfume/shared/widgets/brand_chrome.dart';
 
 class CheckoutSummary extends StatelessWidget {

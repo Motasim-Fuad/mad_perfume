@@ -14,7 +14,7 @@ class CategoryPage extends GetView<CategoryController> {
     return SafeArea(
       bottom: false,
       child: ListView(
-        padding: const EdgeInsets.fromLTRB(20, 12, 20, AppSizes.navClearance),
+        padding: EdgeInsets.fromLTRB(20, 12, 20, AppSizes.navClearanceOf(context)),
         children: [
           Text(
             'product_category'.tr,
