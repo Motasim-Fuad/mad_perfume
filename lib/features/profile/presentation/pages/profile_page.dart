@@ -67,34 +67,34 @@ class ProfilePage extends GetView<ProfileController> {
             const SizedBox(height: 12),
             GlossyCard(
               onTap: controller.openSaved,
-              child: Column(
+              child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'saved_items_count'.tr,
                     style: GoogleFonts.dmSans(fontSize: 11, letterSpacing: 1.2, color: AppColors.muted),
                   ),
-                  const SizedBox(height: 6),
+                  Spacer(),
                   Text(
                     '${controller.session.wishlist.length}',
-                    style: GoogleFonts.dmSans(fontSize: 22, fontWeight: FontWeight.w700),
+                    style: GoogleFonts.dmSans(fontSize: 11, fontWeight: FontWeight.w700),
                   ),
                 ],
               ),
             ),
             const SizedBox(height: 12),
             GlossyCard(
-              child: Column(
+              child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'tier_status'.tr,
                     style: GoogleFonts.dmSans(fontSize: 11, letterSpacing: 1.2, color: AppColors.muted),
                   ),
-                  const SizedBox(height: 6),
+                  Spacer(),
                   Text(
                     'platinum'.tr,
-                    style: GoogleFonts.dmSans(fontSize: 22, fontWeight: FontWeight.w700),
+                    style: GoogleFonts.dmSans(fontSize: 11, letterSpacing: 1.2, fontWeight: FontWeight.w700),
                   ),
                 ],
               ),
