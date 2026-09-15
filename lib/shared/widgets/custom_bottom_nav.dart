@@ -16,57 +16,60 @@ class CustomBottomNav extends StatelessWidget {
         top: false,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
-          child: Container(
-            height: AppSizes.navHeight,
-            decoration: BoxDecoration(
-              color: AppColors.surface.withValues(alpha: 0.94),
-              borderRadius: BorderRadius.circular(40),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.08),
-                  blurRadius: 24,
-                  offset: const Offset(0, 10),
-                ),
-              ],
-            ),
-            child: Row(
-              children: [
-                _Item(
-                  index: 0,
-                  icon: Icons.home_rounded,
-                  label: 'home'.tr,
-                  selected: controller.tabIndex.value == 0,
-                  onTap: () => controller.setTab(0),
-                ),
-                _Item(
-                  index: 1,
-                  icon: Icons.shopping_bag_outlined,
-                  label: 'products'.tr,
-                  selected: controller.tabIndex.value == 1,
-                  onTap: () => controller.setTab(1),
-                ),
-                _Item(
-                  index: 2,
-                  icon: Icons.shopping_cart_outlined,
-                  label: 'cart'.tr,
-                  selected: controller.tabIndex.value == 2,
-                  onTap: () => controller.setTab(2),
-                ),
-                _Item(
-                  index: 3,
-                  icon: Icons.workspace_premium_outlined,
-                  label: 'loyalty'.tr,
-                  selected: controller.tabIndex.value == 3,
-                  onTap: () => controller.setTab(3),
-                ),
-                _Item(
-                  index: 4,
-                  icon: Icons.person_outline,
-                  label: 'profile'.tr,
-                  selected: controller.tabIndex.value == 4,
-                  onTap: () => controller.setTab(4),
-                ),
-              ],
+          child: Material(
+            color: Colors.transparent,
+            child: Container(
+              height: AppSizes.navHeight,
+              decoration: BoxDecoration(
+                color: AppColors.surface,
+                borderRadius: BorderRadius.circular(40),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.12),
+                    blurRadius: 24,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
+              ),
+              child: Row(
+                children: [
+                  _Item(
+                    index: 0,
+                    icon: Icons.home_rounded,
+                    label: 'home'.tr,
+                    selected: controller.tabIndex.value == 0,
+                    onTap: () => controller.setTab(0),
+                  ),
+                  _Item(
+                    index: 1,
+                    icon: Icons.shopping_bag_outlined,
+                    label: 'products'.tr,
+                    selected: controller.tabIndex.value == 1,
+                    onTap: () => controller.setTab(1),
+                  ),
+                  _Item(
+                    index: 2,
+                    icon: Icons.shopping_cart_outlined,
+                    label: 'cart'.tr,
+                    selected: controller.tabIndex.value == 2,
+                    onTap: () => controller.setTab(2),
+                  ),
+                  _Item(
+                    index: 3,
+                    icon: Icons.workspace_premium_outlined,
+                    label: 'loyalty'.tr,
+                    selected: controller.tabIndex.value == 3,
+                    onTap: () => controller.setTab(3),
+                  ),
+                  _Item(
+                    index: 4,
+                    icon: Icons.person_outline,
+                    label: 'profile'.tr,
+                    selected: controller.tabIndex.value == 4,
+                    onTap: () => controller.setTab(4),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

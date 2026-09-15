@@ -14,10 +14,11 @@ class ProfilePage extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      bottom: false,
       child: Obx(() {
         final recent = controller.recentOrders;
         return ListView(
-          padding: const EdgeInsets.fromLTRB(20, 12, 20, 110),
+          padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
           children: [
             Center(
               child: Text(

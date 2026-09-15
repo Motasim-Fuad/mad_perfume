@@ -17,6 +17,7 @@ class MainShellPage extends GetView<ShellController> {
     return Obx(
       () => Scaffold(
         backgroundColor: AppColors.background,
+        extendBody: true,
         body: IndexedStack(
           index: controller.tabIndex.value,
           children: const [

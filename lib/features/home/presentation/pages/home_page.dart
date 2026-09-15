@@ -3,12 +3,11 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:madperfume/config/routes/app_routes.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
-import 'package:madperfume/core/constants/catalog_data.dart';
 import 'package:madperfume/features/home/presentation/controllers/home_controller.dart';
 import 'package:madperfume/features/home/presentation/widgets/boutique_preview.dart';
 import 'package:madperfume/features/home/presentation/widgets/collection_strip.dart';
 import 'package:madperfume/features/home/presentation/widgets/featured_product_card.dart';
-import 'package:madperfume/features/home/presentation/widgets/home_hero_banner.dart';
+import 'package:madperfume/features/home/presentation/widgets/home_hero_carousel.dart';
 import 'package:madperfume/features/home/presentation/widgets/home_top_bar.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -17,6 +16,7 @@ class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      bottom: false,
       child: CustomScrollView(
         slivers: [
           const SliverToBoxAdapter(child: HomeTopBar()),
@@ -43,9 +43,9 @@ class HomePage extends GetView<HomeController> {
                   const SizedBox(height: 14),
                   const HomeSearchField(),
                   const SizedBox(height: 18),
-                  HomeHeroBanner(
-                    product: CatalogData.productById('velvet-oud'),
-                    onTap: () => controller.openProduct('velvet-oud'),
+                  HomeHeroCarousel(
+                    products: controller.featured,
+                    onOpen: controller.openProduct,
                   ),
                   const SizedBox(height: 22),
                   CollectionStrip(
@@ -89,7 +89,7 @@ class HomePage extends GetView<HomeController> {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 28, 20, 110),
+              padding: const EdgeInsets.fromLTRB(20, 28, 20, 24),
               child: BoutiquePreview(
                 branches: controller.boutiques,
                 onViewAll: controller.openBranches,

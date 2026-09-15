@@ -11,8 +11,9 @@ class CategoryPage extends GetView<CategoryController> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      bottom: false,
       child: ListView(
-        padding: const EdgeInsets.fromLTRB(20, 12, 20, 110),
+        padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
         children: [
           Text(
             'product_category'.tr,

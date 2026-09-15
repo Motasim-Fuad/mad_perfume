@@ -12,10 +12,11 @@ class LoyaltyPage extends GetView<LoyaltyController> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      bottom: false,
       child: Obx(() {
         final points = controller.session.points.value;
         return ListView(
-          padding: const EdgeInsets.fromLTRB(20, 12, 20, 110),
+          padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
           children: [
             Center(
               child: Text(

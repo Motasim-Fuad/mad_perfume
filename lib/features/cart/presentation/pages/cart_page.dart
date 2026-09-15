@@ -15,6 +15,7 @@ class CartPage extends GetView<CartController> {
   Widget build(BuildContext context) {
     final session = controller.session;
     return SafeArea(
+      bottom: false,
       child: Obx(() {
         final items = session.cart.toList();
         return Column(
