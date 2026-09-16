@@ -53,16 +53,23 @@ class AppField extends StatelessWidget {
           cursorColor: AppColors.ink,
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: GoogleFonts.dmSans(color: AppColors.muted.withValues(alpha: 0.7)),
+            hintStyle: GoogleFonts.dmSans(
+              color: AppColors.muted.withValues(alpha: 0.7),
+            ),
             filled: true,
             fillColor: AppColors.surfaceMuted,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 18,
+              vertical: 16,
+            ),
             suffixIcon: onToggleObscure == null
                 ? null
                 : IconButton(
                     onPressed: onToggleObscure,
                     icon: Icon(
-                      obscure ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+                      obscure
+                          ? Icons.visibility_outlined
+                          : Icons.visibility_off_outlined,
                       color: AppColors.muted,
                       size: 20,
                     ),

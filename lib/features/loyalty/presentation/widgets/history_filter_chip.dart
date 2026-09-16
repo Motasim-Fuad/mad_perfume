@@ -25,7 +25,9 @@ class HistoryFilterChip extends StatelessWidget {
         label: Text(label),
         onSelected: (_) => onSelected(id),
         selectedColor: AppColors.ink,
-        labelStyle: GoogleFonts.dmSans(color: selected ? Colors.white : AppColors.ink),
+        labelStyle: GoogleFonts.dmSans(
+          color: selected ? Colors.white : AppColors.ink,
+        ),
       ),
     );
   }

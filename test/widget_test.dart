@@ -1,12 +1,16 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:madperfume/core/constants/catalog_data.dart';
+import 'package:madperfume/core/constants/commerce_rules.dart';
+import 'package:madperfume/core/utils/validators.dart';
 
 void main() {
-  test('catalog collections match products', () {
-    final ids = CatalogData.collections.map((item) => item.id).toSet();
-    for (final product in CatalogData.products) {
-      expect(ids.contains(product.collectionId), isTrue);
-    }
-    expect(CatalogData.usdPerPoint, 0.01);
+  test('checkout preview follows backend tax contract', () {
+    expect(CommerceRules.taxOn(100), 8);
+    expect(CommerceRules.previewTotal(100), 108);
+  });
+
+  test('password follows backend strength rules', () {
+    expect(Validators.password('short1!', 'invalid'), 'invalid');
+    expect(Validators.password('longpassword', 'invalid'), 'invalid');
+    expect(Validators.password('Strong#123', 'invalid'), isNull);
   });
 }

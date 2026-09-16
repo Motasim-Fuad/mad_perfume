@@ -31,7 +31,9 @@ class LanguageTile extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColors.surfaceMuted,
             borderRadius: BorderRadius.circular(18),
-            border: Border.all(color: active ? AppColors.ink : Colors.transparent),
+            border: Border.all(
+              color: active ? AppColors.ink : Colors.transparent,
+            ),
           ),
           child: Row(
             children: [
@@ -43,13 +45,19 @@ class LanguageTile extends StatelessWidget {
                       title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.dmSans(fontSize: 16, fontWeight: FontWeight.w600),
+                      style: GoogleFonts.dmSans(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     Text(
                       subtitle,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.dmSans(fontSize: 12, color: AppColors.muted),
+                      style: GoogleFonts.dmSans(
+                        fontSize: 12,
+                        color: AppColors.muted,
+                      ),
                     ),
                   ],
                 ),

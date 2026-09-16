@@ -27,13 +27,19 @@ class AmountRow extends StatelessWidget {
           Expanded(
             child: Text(
               label,
-              style: GoogleFonts.dmSans(fontWeight: bold ? FontWeight.w800 : FontWeight.w500),
+              style: GoogleFonts.dmSans(
+                fontWeight: bold ? FontWeight.w800 : FontWeight.w500,
+              ),
             ),
           ),
           if (free)
             Text(freeLabel ?? '')
           else
-            MoneyText(value, size: 14, weight: bold ? FontWeight.w800 : FontWeight.w600),
+            MoneyText(
+              value,
+              size: 14,
+              weight: bold ? FontWeight.w800 : FontWeight.w600,
+            ),
         ],
       ),
     );

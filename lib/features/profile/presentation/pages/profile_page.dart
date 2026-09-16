@@ -1,109 +1,156 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
 import 'package:madperfume/core/constants/app_sizes.dart';
-import 'package:madperfume/features/profile/presentation/controllers/profile_controller.dart';
+import 'package:madperfume/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:madperfume/features/profile/presentation/cubit/profile_cubits.dart';
 import 'package:madperfume/features/profile/presentation/widgets/order_history_card.dart';
 import 'package:madperfume/shared/widgets/brand_chrome.dart';
 import 'package:madperfume/shared/widgets/custom_button.dart';
 import 'package:madperfume/shared/widgets/empty_widget.dart';
+import 'package:madperfume/shared/widgets/query_body.dart';
 
-class ProfilePage extends GetView<ProfileController> {
+class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = context.read<ProfileHomeCubit>();
     return SafeArea(
       bottom: false,
-      child: Obx(() {
-        final recent = controller.recentOrders;
-        return ListView(
-          padding: EdgeInsets.fromLTRB(20, 12, 20, AppSizes.navClearanceOf(context)),
-          children: [
-            Center(
-              child: Text(
-                'profile'.tr.toUpperCase(),
-                style: GoogleFonts.dmSans(letterSpacing: 3, fontWeight: FontWeight.w700),
+      child: BlocBuilder<ProfileHomeCubit, ProfileHomeState>(
+        builder: (context, state) {
+          final recent = state.orders.take(2);
+          return QueryBody(
+            loading: state.loading,
+            error: state.error,
+            onRetry: controller.load,
+            child: ListView(
+              padding: EdgeInsets.fromLTRB(
+                20,
+                12,
+                20,
+                AppSizes.navClearanceOf(context),
               ),
-            ),
-            Align(
-              alignment: AlignmentDirectional.centerEnd,
-              child: IconButton(
-                onPressed: controller.openSettings,
-                icon: const Icon(Icons.settings_outlined),
-              ),
-            ),
-            Text(
-              'order_history'.tr,
-              style: GoogleFonts.cormorantGaramond(fontSize: 28, fontWeight: FontWeight.w600),
-            ),
-            Text(
-              'recent_transactions'.tr,
-              style: GoogleFonts.dmSans(fontSize: 11, letterSpacing: 1.2, color: AppColors.muted),
-            ),
-            const SizedBox(height: 12),
-            if (controller.orders.isEmpty) EmptyWidget(message: 'empty_orders'.tr),
-            ...recent.map(
-              (order) => Padding(
-                padding: const EdgeInsets.only(bottom: 12),
-                child: OrderHistoryCard(
-                  order: order,
-                  onTap: () => controller.openOrder(order.id),
+              children: [
+                Center(
+                  child: Text(
+                    'profile'.tr.toUpperCase(),
+                    style: GoogleFonts.dmSans(
+                      letterSpacing: 3,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            if (controller.orders.isNotEmpty) ...[
-              const SizedBox(height: 4),
-              AppButton(
-                label: 'all_orders'.tr,
-                outlined: true,
-                onPressed: controller.openAllOrders,
-              ),
-            ],
-            const SizedBox(height: 22),
-            Text(
-              'others'.tr,
-              style: GoogleFonts.cormorantGaramond(fontSize: 28, fontWeight: FontWeight.w600),
-            ),
-            const SizedBox(height: 12),
-            GlossyCard(
-              onTap: controller.openSaved,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'saved_items_count'.tr,
-                    style: GoogleFonts.dmSans(fontSize: 11, letterSpacing: 1.2, color: AppColors.muted),
+                Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: IconButton(
+                    onPressed: controller.openSettings,
+                    icon: const Icon(Icons.settings_outlined),
                   ),
-                  Spacer(),
-                  Text(
-                    '${controller.session.wishlist.length}',
-                    style: GoogleFonts.dmSans(fontSize: 11, fontWeight: FontWeight.w700),
+                ),
+                Text(
+                  'order_history'.tr,
+                  style: GoogleFonts.cormorantGaramond(
+                    fontSize: 28,
+                    fontWeight: FontWeight.w600,
                   ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 12),
-            GlossyCard(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'tier_status'.tr,
-                    style: GoogleFonts.dmSans(fontSize: 11, letterSpacing: 1.2, color: AppColors.muted),
+                ),
+                Text(
+                  'recent_transactions'.tr,
+                  style: GoogleFonts.dmSans(
+                    fontSize: 11,
+                    letterSpacing: 1.2,
+                    color: AppColors.muted,
                   ),
-                  Spacer(),
-                  Text(
-                    'platinum'.tr,
-                    style: GoogleFonts.dmSans(fontSize: 11, letterSpacing: 1.2, fontWeight: FontWeight.w700),
+                ),
+                const SizedBox(height: 12),
+                if (state.orders.isEmpty)
+                  EmptyWidget(message: 'empty_orders'.tr),
+                ...recent.map(
+                  (order) => Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: OrderHistoryCard(
+                      order: order,
+                      onTap: () => controller.openOrder(order.id),
+                    ),
+                  ),
+                ),
+                if (state.orders.isNotEmpty) ...[
+                  const SizedBox(height: 4),
+                  AppButton(
+                    label: 'all_orders'.tr,
+                    outlined: true,
+                    onPressed: controller.openAllOrders,
                   ),
                 ],
-              ),
+                const SizedBox(height: 22),
+                Text(
+                  'others'.tr,
+                  style: GoogleFonts.cormorantGaramond(
+                    fontSize: 28,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                GlossyCard(
+                  onTap: controller.openSaved,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'saved_items_count'.tr,
+                        style: GoogleFonts.dmSans(
+                          fontSize: 11,
+                          letterSpacing: 1.2,
+                          color: AppColors.muted,
+                        ),
+                      ),
+                      Spacer(),
+                      Text(
+                        '${state.savedCount}',
+                        style: GoogleFonts.dmSans(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 12),
+                GlossyCard(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'tier_status'.tr,
+                        style: GoogleFonts.dmSans(
+                          fontSize: 11,
+                          letterSpacing: 1.2,
+                          color: AppColors.muted,
+                        ),
+                      ),
+                      Spacer(),
+                      BlocBuilder<AuthCubit, AuthState>(
+                        builder: (context, auth) => Text(
+                          (auth.profile?.tier ?? '').toUpperCase(),
+                          style: GoogleFonts.dmSans(
+                            fontSize: 11,
+                            letterSpacing: 1.2,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ],
-        );
-      }),
+          );
+        },
+      ),
     );
   }
 }

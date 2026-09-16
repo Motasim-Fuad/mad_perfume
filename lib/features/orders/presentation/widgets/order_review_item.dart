@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
-import 'package:madperfume/features/cart/data/models/cart_item.dart';
+import 'package:madperfume/core/models/commerce_models.dart';
 import 'package:madperfume/shared/widgets/glossy_card.dart';
 import 'package:madperfume/shared/widgets/money_text.dart';
 
@@ -14,7 +14,7 @@ class OrderReviewItem extends StatelessWidget {
     required this.onReview,
   });
 
-  final CartItem item;
+  final OrderItemModel item;
   final bool reviewed;
   final VoidCallback onReview;
 
@@ -40,10 +40,13 @@ class OrderReviewItem extends StatelessWidget {
                         style: GoogleFonts.dmSans(fontWeight: FontWeight.w700),
                       ),
                       Text(
-                        item.volume,
+                        item.variant,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.dmSans(fontSize: 12, color: AppColors.muted),
+                        style: GoogleFonts.dmSans(
+                          fontSize: 12,
+                          color: AppColors.muted,
+                        ),
                       ),
                     ],
                   ),
@@ -67,7 +70,10 @@ class OrderReviewItem extends StatelessWidget {
                   onPressed: onReview,
                   child: Text(
                     'write_a_review'.tr,
-                    style: GoogleFonts.dmSans(fontSize: 12, fontWeight: FontWeight.w700),
+                    style: GoogleFonts.dmSans(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
               ),

@@ -3,11 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
 
 class BranchInfoBlock extends StatelessWidget {
-  const BranchInfoBlock({
-    super.key,
-    required this.title,
-    required this.body,
-  });
+  const BranchInfoBlock({super.key, required this.title, required this.body});
 
   final String title;
   final String body;
@@ -20,7 +16,10 @@ class BranchInfoBlock extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(title, style: GoogleFonts.dmSans(fontWeight: FontWeight.w700)),
-          Text(body, style: GoogleFonts.dmSans(height: 1.45, color: AppColors.inkSoft)),
+          Text(
+            body,
+            style: GoogleFonts.dmSans(height: 1.45, color: AppColors.inkSoft),
+          ),
         ],
       ),
     );

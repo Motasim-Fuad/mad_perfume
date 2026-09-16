@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
-import 'package:madperfume/core/services/session_store.dart';
-import 'package:madperfume/features/cart/data/models/cart_item.dart';
+import 'package:madperfume/core/models/commerce_models.dart';
+import 'package:madperfume/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:madperfume/shared/widgets/brand_chrome.dart';
 import 'package:madperfume/shared/widgets/remote_image.dart';
 
 class CartLineItem extends StatelessWidget {
   const CartLineItem({super.key, required this.item});
 
-  final CartItem item;
+  final CartLineModel item;
 
   @override
   Widget build(BuildContext context) {
-    final session = Get.find<SessionStore>();
+    final cart = context.read<CartCubit>();
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -32,10 +32,14 @@ class CartLineItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                item.volume.toUpperCase(),
+                item.variant.toUpperCase(),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.dmSans(fontSize: 10, letterSpacing: 1, color: AppColors.muted),
+                style: GoogleFonts.dmSans(
+                  fontSize: 10,
+                  letterSpacing: 1,
+                  color: AppColors.muted,
+                ),
               ),
               Text(
                 item.name,
@@ -46,12 +50,12 @@ class CartLineItem extends StatelessWidget {
               Row(
                 children: [
                   IconButton(
-                    onPressed: () => session.setQty(item.productId, item.quantity - 1),
+                    onPressed: () => cart.setQty(item.id, item.quantity - 1),
                     icon: const Icon(Icons.remove, size: 16),
                   ),
                   Text('${item.quantity}'),
                   IconButton(
-                    onPressed: () => session.setQty(item.productId, item.quantity + 1),
+                    onPressed: () => cart.setQty(item.id, item.quantity + 1),
                     icon: const Icon(Icons.add, size: 16),
                   ),
                   const Spacer(),

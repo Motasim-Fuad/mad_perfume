@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:madperfume/core/constants/catalog_data.dart';
+import 'package:madperfume/core/models/catalog_models.dart';
 import 'package:madperfume/shared/widgets/remote_image.dart';
 
 class HomeHeroBanner extends StatelessWidget {
   const HomeHeroBanner({super.key, required this.product, required this.onTap});
 
-  final ProductEntity product;
+  final ProductModel product;
   final VoidCallback onTap;
 
   @override

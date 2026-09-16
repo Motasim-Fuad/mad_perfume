@@ -24,7 +24,8 @@ class StorageService {
     return null;
   }
 
-  Future<void> writeJson(String key, Object value) => _box.write(key, jsonEncode(value));
+  Future<void> writeJson(String key, Object value) =>
+      _box.write(key, jsonEncode(value));
 
   List<dynamic> readList(String key) {
     final raw = _box.read(key);

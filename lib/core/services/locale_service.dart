@@ -23,11 +23,15 @@ class LocaleService extends GetxService {
     return this;
   }
 
-  bool get isRtl => locale.value.languageCode == 'ar' || locale.value.languageCode == 'he';
+  bool get isRtl =>
+      locale.value.languageCode == 'ar' || locale.value.languageCode == 'he';
 
   Future<void> updateLocale(Locale value) async {
     locale.value = value;
-    await _storage.write(StorageKeys.locale, '${value.languageCode}_${value.countryCode}');
+    await _storage.write(
+      StorageKeys.locale,
+      '${value.languageCode}_${value.countryCode}',
+    );
     await Get.updateLocale(value);
   }
 }
@@ -45,10 +49,9 @@ ThemeData buildAppTheme() {
     ),
   );
   return base.copyWith(
-    textTheme: GoogleFonts.dmSansTextTheme(base.textTheme).apply(
-      bodyColor: AppColors.ink,
-      displayColor: AppColors.ink,
-    ),
+    textTheme: GoogleFonts.dmSansTextTheme(
+      base.textTheme,
+    ).apply(bodyColor: AppColors.ink, displayColor: AppColors.ink),
     splashFactory: InkRipple.splashFactory,
     dividerColor: AppColors.line,
   );

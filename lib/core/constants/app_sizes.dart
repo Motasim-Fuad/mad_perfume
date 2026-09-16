@@ -13,6 +13,9 @@ class AppSizes {
   static const double navGap = 20;
 
   static double navClearanceOf(BuildContext context) {
-    return navHeight + navBottomPad + navGap + MediaQuery.paddingOf(context).bottom;
+    return navHeight +
+        navBottomPad +
+        navGap +
+        MediaQuery.paddingOf(context).bottom;
   }
 }

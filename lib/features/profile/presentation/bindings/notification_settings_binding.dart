@@ -1,9 +1,0 @@
-import 'package:get/get.dart';
-import 'package:madperfume/features/profile/presentation/controllers/notification_settings_controller.dart';
-
-class NotificationSettingsBinding extends Bindings {
-  @override
-  void dependencies() {
-    Get.put(NotificationSettingsController());
-  }
-}

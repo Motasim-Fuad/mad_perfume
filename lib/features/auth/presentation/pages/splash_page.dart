@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:madperfume/config/routes/app_routes.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
-import 'package:madperfume/core/services/session_store.dart';
+import 'package:madperfume/features/auth/presentation/cubit/auth_cubit.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -17,7 +18,10 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     Future<void>.delayed(const Duration(milliseconds: 1600), () {
-      final loggedIn = Get.find<SessionStore>().isLoggedIn;
+      if (!mounted) {
+        return;
+      }
+      final loggedIn = context.read<AuthCubit>().state.isLoggedIn;
       Get.offAllNamed(loggedIn ? AppRoutes.main : AppRoutes.welcome);
     });
   }

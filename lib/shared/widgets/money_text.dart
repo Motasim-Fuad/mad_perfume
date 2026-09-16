@@ -5,7 +5,12 @@ import 'package:madperfume/core/constants/app_colors.dart';
 import 'package:madperfume/core/services/locale_service.dart';
 
 class MoneyText extends StatelessWidget {
-  const MoneyText(this.value, {super.key, this.size = 16, this.weight = FontWeight.w700});
+  const MoneyText(
+    this.value, {
+    super.key,
+    this.size = 16,
+    this.weight = FontWeight.w700,
+  });
 
   final double value;
   final double size;
@@ -21,7 +26,11 @@ class MoneyText extends StatelessWidget {
         rtl ? '$amount \$' : '\$$amount',
         maxLines: 1,
         overflow: TextOverflow.visible,
-        style: GoogleFonts.dmSans(fontSize: size, fontWeight: weight, color: AppColors.ink),
+        style: GoogleFonts.dmSans(
+          fontSize: size,
+          fontWeight: weight,
+          color: AppColors.ink,
+        ),
       ),
     );
   }

@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:madperfume/config/routes/app_routes.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
-import 'package:madperfume/features/auth/presentation/controllers/auth_controller.dart';
+import 'package:madperfume/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:madperfume/features/auth/presentation/widgets/auth_footer_link.dart';
 import 'package:madperfume/shared/widgets/app_field.dart';
 import 'package:madperfume/shared/widgets/brand_chrome.dart';
 import 'package:madperfume/shared/widgets/custom_button.dart';
 
-class LoginPage extends GetView<AuthController> {
+class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = context.read<AuthCubit>();
     return ScreenScaffold(
       header: const BrandHeader(),
       child: LayoutBuilder(
@@ -46,7 +48,10 @@ class LoginPage extends GetView<AuthController> {
                     Text(
                       'sign_in_subtitle'.tr,
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.dmSans(color: AppColors.muted, fontSize: 14),
+                      style: GoogleFonts.dmSans(
+                        color: AppColors.muted,
+                        fontSize: 14,
+                      ),
                     ),
                     const SizedBox(height: 28),
                     AppField(
@@ -55,13 +60,15 @@ class LoginPage extends GetView<AuthController> {
                       hint: 'enter_your_details'.tr,
                     ),
                     const SizedBox(height: 16),
-                    Obx(
-                      () => AppField(
+                    BlocBuilder<AuthCubit, AuthState>(
+                      buildWhen: (before, after) =>
+                          before.obscureLogin != after.obscureLogin,
+                      builder: (context, state) => AppField(
                         controller: controller.loginPassword,
                         label: 'password'.tr,
                         hint: '********',
-                        obscure: controller.obscureLogin.value,
-                        onToggleObscure: controller.obscureLogin.toggle,
+                        obscure: state.obscureLogin,
+                        onToggleObscure: controller.toggleLoginObscure,
                       ),
                     ),
                     Align(
@@ -82,11 +89,11 @@ class LoginPage extends GetView<AuthController> {
                       ),
                     ),
                     const Spacer(),
-                    Obx(
-                      () => AppButton(
+                    BlocBuilder<AuthCubit, AuthState>(
+                      builder: (context, state) => AppButton(
                         label: 'login'.tr,
-                        loading: controller.loading.value,
-                        error: controller.actionError.value,
+                        loading: state.loading,
+                        error: state.error,
                         onPressed: controller.login,
                       ),
                     ),
@@ -103,7 +110,10 @@ class LoginPage extends GetView<AuthController> {
                     Text(
                       '© 2026 MAD perfume. Invisible elegance.',
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.dmSans(fontSize: 11, color: AppColors.muted),
+                      style: GoogleFonts.dmSans(
+                        fontSize: 11,
+                        color: AppColors.muted,
+                      ),
                     ),
                     const SizedBox(height: 8),
                   ],

@@ -3,7 +3,11 @@ import 'package:get/get.dart';
 import 'package:madperfume/features/auth/presentation/widgets/social_auth_chip.dart';
 
 class SocialAuthRow extends StatelessWidget {
-  const SocialAuthRow({super.key, required this.onGoogle, required this.onApple});
+  const SocialAuthRow({
+    super.key,
+    required this.onGoogle,
+    required this.onApple,
+  });
 
   final VoidCallback onGoogle;
   final VoidCallback onApple;

@@ -55,7 +55,10 @@ class RemoteImage extends StatelessWidget {
           child: SizedBox(
             width: 18,
             height: 18,
-            child: CircularProgressIndicator(strokeWidth: 1.6, color: AppColors.muted),
+            child: CircularProgressIndicator(
+              strokeWidth: 1.6,
+              color: AppColors.muted,
+            ),
           ),
         ),
       ),

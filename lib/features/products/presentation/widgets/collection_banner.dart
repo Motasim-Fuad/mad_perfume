@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:madperfume/core/constants/catalog_data.dart';
+import 'package:madperfume/core/models/catalog_models.dart';
 import 'package:madperfume/shared/widgets/remote_image.dart';
 
 class CollectionBanner extends StatelessWidget {
-  const CollectionBanner({super.key, required this.collection, required this.onTap});
+  const CollectionBanner({
+    super.key,
+    required this.collection,
+    required this.onTap,
+  });
 
-  final CollectionEntity collection;
+  final CategoryModel collection;
   final VoidCallback onTap;
 
   @override
@@ -22,7 +26,10 @@ class CollectionBanner extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              RemoteImage(url: collection.imageUrl, label: 'collection image here'),
+              RemoteImage(
+                url: collection.imageUrl,
+                label: 'collection image here',
+              ),
               DecoratedBox(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -51,7 +58,7 @@ class CollectionBanner extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        collection.heroLabel,
+                        collection.name,
                         style: GoogleFonts.cormorantGaramond(
                           color: Colors.white,
                           fontSize: 28,

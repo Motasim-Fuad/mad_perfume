@@ -2,17 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
-import 'package:madperfume/core/constants/catalog_data.dart';
+import 'package:madperfume/core/models/loyalty_models.dart';
 import 'package:madperfume/shared/widgets/remote_image.dart';
 
 class RewardListCard extends StatelessWidget {
-  const RewardListCard({
-    super.key,
-    required this.reward,
-    required this.onTap,
-  });
+  const RewardListCard({super.key, required this.reward, required this.onTap});
 
-  final RewardEntity reward;
+  final RewardModel reward;
   final VoidCallback onTap;
 
   @override
@@ -27,7 +23,10 @@ class RewardListCard extends StatelessWidget {
             children: [
               AspectRatio(
                 aspectRatio: 1.4,
-                child: RemoteImage(url: reward.imageUrl, label: 'reward image here'),
+                child: RemoteImage(
+                  url: reward.imageUrl,
+                  label: 'reward image here',
+                ),
               ),
               Container(
                 width: double.infinity,
@@ -39,12 +38,25 @@ class RewardListCard extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(reward.title, maxLines: 2, overflow: TextOverflow.ellipsis, style: GoogleFonts.dmSans(fontWeight: FontWeight.w700)),
-                          Text('${reward.points} pts', style: GoogleFonts.dmSans(color: AppColors.muted)),
+                          Text(
+                            reward.name,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.dmSans(
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          Text(
+                            '${reward.pointsRequired} pts',
+                            style: GoogleFonts.dmSans(color: AppColors.muted),
+                          ),
                         ],
                       ),
                     ),
-                    Text('redeem'.tr, style: GoogleFonts.dmSans(fontWeight: FontWeight.w700)),
+                    Text(
+                      'redeem'.tr,
+                      style: GoogleFonts.dmSans(fontWeight: FontWeight.w700),
+                    ),
                   ],
                 ),
               ),

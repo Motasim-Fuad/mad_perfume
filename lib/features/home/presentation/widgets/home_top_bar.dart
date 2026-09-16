@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
-import 'package:madperfume/core/services/session_store.dart';
-import 'package:madperfume/features/home/presentation/controllers/home_controller.dart';
+import 'package:madperfume/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:madperfume/features/home/presentation/cubit/home_cubit.dart';
 import 'package:madperfume/shared/widgets/remote_image.dart';
 
 class HomeTopBar extends StatelessWidget {
@@ -11,8 +12,7 @@ class HomeTopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<HomeController>();
-    final user = Get.find<SessionStore>().user;
+    final controller = context.read<HomeCubit>();
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
       child: Row(
@@ -35,17 +35,21 @@ class HomeTopBar extends StatelessWidget {
           ),
           IconButton(
             onPressed: controller.openNotifications,
-            icon: const Icon(Icons.notifications_none_rounded, color: AppColors.ink),
+            icon: const Icon(
+              Icons.notifications_none_rounded,
+              color: AppColors.ink,
+            ),
           ),
-          Obx(
-            () => Padding(
+          BlocBuilder<AuthCubit, AuthState>(
+            builder: (context, state) => Padding(
               padding: const EdgeInsets.only(right: 8),
               child: ClipOval(
                 child: SizedBox(
                   width: 32,
                   height: 32,
                   child: RemoteImage(
-                    url: user.value?.avatarUrl ??
+                    url:
+                        state.profile?.avatarUrl ??
                         'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
                     label: 'profile image here',
                   ),

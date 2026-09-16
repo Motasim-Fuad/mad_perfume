@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
-import 'package:madperfume/core/constants/catalog_data.dart';
+import 'package:madperfume/core/models/catalog_models.dart';
 import 'package:madperfume/shared/widgets/remote_image.dart';
 
 class CollectionStrip extends StatelessWidget {
@@ -13,9 +13,9 @@ class CollectionStrip extends StatelessWidget {
     required this.onOpen,
   });
 
-  final List<CollectionEntity> collections;
+  final List<CategoryModel> collections;
   final VoidCallback onViewAll;
-  final ValueChanged<String> onOpen;
+  final ValueChanged<int> onOpen;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,10 @@ class CollectionStrip extends StatelessWidget {
                 'all_collection'.tr,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.cormorantGaramond(fontSize: 24, fontWeight: FontWeight.w600),
+                style: GoogleFonts.cormorantGaramond(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
             TextButton(
@@ -62,16 +65,22 @@ class CollectionStrip extends StatelessWidget {
                         child: SizedBox(
                           width: 58,
                           height: 58,
-                          child: RemoteImage(url: item.imageUrl, label: 'collection image here'),
+                          child: RemoteImage(
+                            url: item.imageUrl,
+                            label: 'collection image here',
+                          ),
                         ),
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        item.nameKey.tr,
+                        item.name,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
-                        style: GoogleFonts.dmSans(fontSize: 10, letterSpacing: 0.6),
+                        style: GoogleFonts.dmSans(
+                          fontSize: 10,
+                          letterSpacing: 0.6,
+                        ),
                       ),
                     ],
                   ),

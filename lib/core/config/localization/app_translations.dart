@@ -6,8 +6,8 @@ import 'package:madperfume/core/config/localization/he_il.dart';
 class AppTranslations extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
-        'en_US': enUs,
-        'ar_SA': arSa,
-        'he_IL': heIl,
-      };
+    'en_US': enUs,
+    'ar_SA': arSa,
+    'he_IL': heIl,
+  };
 }

@@ -21,14 +21,29 @@ class EarnStepRow extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(number, style: GoogleFonts.cormorantGaramond(fontSize: 28, fontWeight: FontWeight.w600)),
+          Text(
+            number,
+            style: GoogleFonts.cormorantGaramond(
+              fontSize: 28,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: GoogleFonts.dmSans(fontWeight: FontWeight.w700)),
-                Text(body, style: GoogleFonts.dmSans(color: AppColors.muted, height: 1.4)),
+                Text(
+                  title,
+                  style: GoogleFonts.dmSans(fontWeight: FontWeight.w700),
+                ),
+                Text(
+                  body,
+                  style: GoogleFonts.dmSans(
+                    color: AppColors.muted,
+                    height: 1.4,
+                  ),
+                ),
               ],
             ),
           ),

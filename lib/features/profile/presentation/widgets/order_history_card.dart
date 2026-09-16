@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
-import 'package:madperfume/features/orders/data/models/order_model.dart';
+import 'package:madperfume/core/models/commerce_models.dart';
 import 'package:madperfume/shared/widgets/brand_chrome.dart';
 
 class OrderHistoryCard extends StatelessWidget {
@@ -20,9 +20,15 @@ class OrderHistoryCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(order.id, style: GoogleFonts.dmSans(fontSize: 12, color: AppColors.muted)),
                 Text(
-                  '${order.createdAt.month}/${order.createdAt.day}/${order.createdAt.year}',
+                  order.number,
+                  style: GoogleFonts.dmSans(
+                    fontSize: 12,
+                    color: AppColors.muted,
+                  ),
+                ),
+                Text(
+                  order.status.replaceAll('_', ' '),
                   style: GoogleFonts.dmSans(fontWeight: FontWeight.w700),
                 ),
               ],

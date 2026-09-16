@@ -26,7 +26,12 @@ class Validators {
   }
 
   static String? password(String? value, String message) {
-    if ((value ?? '').length < 6) {
+    final text = value ?? '';
+    final strong =
+        text.length >= 8 &&
+        RegExp(r'\d').hasMatch(text) &&
+        RegExp(r'[^A-Za-z0-9]').hasMatch(text);
+    if (!strong) {
       return message;
     }
     return null;

@@ -104,7 +104,8 @@ const Map<String, String> arSa = {
   'points_available': '%s نقطة متاحة',
   'points_discount': 'خصم النقاط',
   'order_successful': 'تم الطلب بنجاح',
-  'order_success_body': 'بدأت رحلة عطرك. أرسلنا رسالة تأكيد بكل تفاصيل اختيارك.',
+  'order_success_body':
+      'بدأت رحلة عطرك. أرسلنا رسالة تأكيد بكل تفاصيل اختيارك.',
   'track_order': 'تتبع الطلب',
   'back_to_home': 'العودة للرئيسية',
   'order_tracking': 'تتبع الطلب',
@@ -118,9 +119,11 @@ const Map<String, String> arSa = {
   'total_points_available': 'إجمالي النقاط المتاحة',
   'platinum': 'بلاتينيوم',
   'earn_points': 'اكسب نقاطاً',
-  'earn_points_copy': 'استكشف عطوراً جديدة وشارك تجربتك لجمع المزيد من المكافآت.',
+  'earn_points_copy':
+      'استكشف عطوراً جديدة وشارك تجربتك لجمع المزيد من المكافآت.',
   'redeem_rewards': 'استبدل المكافآت',
-  'redeem_rewards_copy': 'استخدم نقاطك لمنتجات حصرية وتجارب البوتيك والمجموعات المنسقة.',
+  'redeem_rewards_copy':
+      'استخدم نقاطك لمنتجات حصرية وتجارب البوتيك والمجموعات المنسقة.',
   'explore_rewards': 'استكشف المكافآت',
   'view_rewards_journey': 'عرض رحلة المكافآت',
   'recent_activity': 'النشاط الأخير',
@@ -132,14 +135,18 @@ const Map<String, String> arSa = {
   'in_app_copy':
       'اكسب نقاطاً لكل منتج تكمله من مجموعة. لكل مجموعة قيمة استبدال يحددها لوحة التحكم.',
   'physical_boutiques': 'البوتيكات الفعلية',
-  'physical_copy': 'زر أيّاً من أتولييهاتنا الفاخرة وقدّم محفظتك الرقمية لرفع النقاط.',
+  'physical_copy':
+      'زر أيّاً من أتولييهاتنا الفاخرة وقدّم محفظتك الرقمية لرفع النقاط.',
   'rewards_experience': 'تجربة المكافآت',
   'step_browse': 'تصفح',
-  'step_browse_copy': 'تصفح كتالوجنا المنسق من العطور المتخصصة وإضافات البوتيك.',
+  'step_browse_copy':
+      'تصفح كتالوجنا المنسق من العطور المتخصصة وإضافات البوتيك.',
   'step_collect': 'اجمع',
-  'step_collect_copy': 'تُضاف النقاط تلقائياً إلى محفظتك الرقمية بعد إتمام الدفع.',
+  'step_collect_copy':
+      'تُضاف النقاط تلقائياً إلى محفظتك الرقمية بعد إتمام الدفع.',
   'step_redeem': 'استبدل',
-  'step_redeem_copy': 'استخدم نقاطك لخصومات حصرية أو دخول الأتولييه أو تجارب الهدايا.',
+  'step_redeem_copy':
+      'استخدم نقاطك لخصومات حصرية أو دخول الأتولييه أو تجارب الهدايا.',
   'rewards': 'المكافآت',
   'exclusive_rewards': 'مكافآت حصرية',
   'exclusive_rewards_copy': 'بدّل نقاطك بتجارب فاخرة وإصدارات محدودة.',
@@ -198,7 +205,8 @@ const Map<String, String> arSa = {
   'required_field': 'هذا الحقل مطلوب',
   'invalid_email': 'أدخل بريداً صالحاً',
   'invalid_phone': 'أدخل رقم هاتف صالحاً',
-  'invalid_password': 'يجب ألا تقل كلمة المرور عن 6 أحرف',
+  'invalid_password':
+      'يجب أن تتكون كلمة المرور من 8 أحرف على الأقل وتتضمن رقماً ورمزاً خاصاً',
   'password_mismatch': 'كلمتا المرور غير متطابقتين',
   'invalid_code': 'أدخل الرمز المكون من 6 أرقام',
   'login_failed': 'تعذر تسجيل الدخول بهذه البيانات',
@@ -228,6 +236,9 @@ const Map<String, String> arSa = {
   'rating_required': 'اختر تقييماً',
   'code_sent': 'تم إرسال الرمز',
   'social_continue': 'متابعة',
+  'social_unavailable':
+      'تسجيل الدخول عبر Google وApple غير متاح في واجهة API المقدمة',
+  'stripe_unavailable': 'الدفع بالبطاقة يتطلب إعداد Stripe PaymentSheet',
   'filter': 'تصفية',
   'newest': 'الأحدث',
   'price': 'السعر',

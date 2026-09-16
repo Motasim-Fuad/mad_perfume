@@ -21,7 +21,10 @@ class WelcomePage extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(22, 8, 22, 16),
           child: Column(
             children: [
-              const BrandHeader(centerTitle: true, trailing: SizedBox(width: 12)),
+              const BrandHeader(
+                centerTitle: true,
+                trailing: SizedBox(width: 12),
+              ),
               const SizedBox(height: 8),
               const Expanded(child: WelcomeHero()),
               const SizedBox(height: 22),

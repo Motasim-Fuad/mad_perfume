@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:madperfume/core/constants/catalog_data.dart';
+import 'package:madperfume/core/models/catalog_models.dart';
 import 'package:madperfume/features/home/presentation/widgets/home_hero_banner.dart';
 
 class HomeHeroCarousel extends StatefulWidget {
@@ -11,8 +11,8 @@ class HomeHeroCarousel extends StatefulWidget {
     required this.onOpen,
   });
 
-  final List<ProductEntity> products;
-  final ValueChanged<String> onOpen;
+  final List<ProductModel> products;
+  final ValueChanged<int> onOpen;
 
   @override
   State<HomeHeroCarousel> createState() => _HomeHeroCarouselState();
@@ -23,7 +23,7 @@ class _HomeHeroCarouselState extends State<HomeHeroCarousel> {
   Timer? _timer;
   var _page = 0;
 
-  List<ProductEntity> get _items => widget.products;
+  List<ProductModel> get _items => widget.products;
 
   @override
   void initState() {

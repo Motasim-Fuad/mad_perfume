@@ -104,7 +104,8 @@ const Map<String, String> heIl = {
   'points_available': '%s נקודות זמינות',
   'points_discount': 'הנחת נקודות',
   'order_successful': 'ההזמנה בוצעה',
-  'order_success_body': 'מסע הניחוח שלכם החל. שלחנו אימייל אישור עם כל פרטי הבחירה.',
+  'order_success_body':
+      'מסע הניחוח שלכם החל. שלחנו אימייל אישור עם כל פרטי הבחירה.',
   'track_order': 'מעקב הזמנה',
   'back_to_home': 'חזרה לבית',
   'order_tracking': 'מעקב הזמנה',
@@ -120,7 +121,8 @@ const Map<String, String> heIl = {
   'earn_points': 'צבירת נקודות',
   'earn_points_copy': 'גלו ניחוחות חדשים ושתפו חוויה כדי לאסוף עוד פרסים.',
   'redeem_rewards': 'מימוש פרסים',
-  'redeem_rewards_copy': 'השתמשו בנקודות למוצרים בלעדיים, חוויות בוטיק וקולקציות אוצרות.',
+  'redeem_rewards_copy':
+      'השתמשו בנקודות למוצרים בלעדיים, חוויות בוטיק וקולקציות אוצרות.',
   'explore_rewards': 'גלו פרסים',
   'view_rewards_journey': 'צפו במסע הפרסים',
   'recent_activity': 'פעילות אחרונה',
@@ -132,14 +134,17 @@ const Map<String, String> heIl = {
   'in_app_copy':
       'צברו נקודות על כל מוצר שאתם משלימים מקולקציה. לכל קולקציה ערך מימוש שמוגדר מהדשבורד.',
   'physical_boutiques': 'בוטיקים פיזיים',
-  'physical_copy': 'בקרו באחד האטליות שלנו והציגו את הארנק הדיגיטלי להעלאת נקודות.',
+  'physical_copy':
+      'בקרו באחד האטליות שלנו והציגו את הארנק הדיגיטלי להעלאת נקודות.',
   'rewards_experience': 'חוויית הפרסים',
   'step_browse': 'עיון',
   'step_browse_copy': 'עיינו בקטלוג האוצר של ניחוחות נישה ותוספות בוטיק.',
   'step_collect': 'איסוף',
-  'step_collect_copy': 'הנקודות מתווספות אוטומטית לארנק הדיגיטלי לאחר תשלום מוצלח.',
+  'step_collect_copy':
+      'הנקודות מתווספות אוטומטית לארנק הדיגיטלי לאחר תשלום מוצלח.',
   'step_redeem': 'מימוש',
-  'step_redeem_copy': 'השתמשו בנקודות להנחות בלעדיות, גישה לאטליה או חוויות מתנה.',
+  'step_redeem_copy':
+      'השתמשו בנקודות להנחות בלעדיות, גישה לאטליה או חוויות מתנה.',
   'rewards': 'פרסים',
   'exclusive_rewards': 'פרסים בלעדיים',
   'exclusive_rewards_copy': 'המירו נקודות לחוויות יוקרה ומהדורות מוגבלות.',
@@ -198,7 +203,7 @@ const Map<String, String> heIl = {
   'required_field': 'שדה זה חובה',
   'invalid_email': 'הזינו אימייל תקין',
   'invalid_phone': 'הזינו מספר טלפון תקין',
-  'invalid_password': 'הסיסמה חייבת להכיל לפחות 6 תווים',
+  'invalid_password': 'הסיסמה חייבת להכיל לפחות 8 תווים, מספר ותו מיוחד',
   'password_mismatch': 'הסיסמאות אינן תואמות',
   'invalid_code': 'הזינו קוד בן 6 ספרות',
   'login_failed': 'לא ניתן להתחבר עם פרטים אלה',
@@ -228,6 +233,8 @@ const Map<String, String> heIl = {
   'rating_required': 'בחרו דירוג',
   'code_sent': 'הקוד נשלח',
   'social_continue': 'המשך',
+  'social_unavailable': 'התחברות Google ו-Apple אינה זמינה ב-API שסופק',
+  'stripe_unavailable': 'תשלום בכרטיס דורש הגדרת Stripe PaymentSheet',
   'filter': 'סינון',
   'newest': 'החדש ביותר',
   'price': 'מחיר',

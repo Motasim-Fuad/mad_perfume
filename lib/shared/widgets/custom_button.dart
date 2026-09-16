@@ -33,7 +33,9 @@ class AppButton extends StatelessWidget {
           child: Material(
             color: outlined ? Colors.transparent : AppColors.ink,
             shape: StadiumBorder(
-              side: outlined ? const BorderSide(color: AppColors.ink, width: 1.2) : BorderSide.none,
+              side: outlined
+                  ? const BorderSide(color: AppColors.ink, width: 1.2)
+                  : BorderSide.none,
             ),
             child: InkWell(
               customBorder: const StadiumBorder(),
@@ -59,7 +61,9 @@ class AppButton extends StatelessWidget {
                               fontSize: 13,
                               fontWeight: FontWeight.w700,
                               letterSpacing: 1.4,
-                              color: outlined ? AppColors.ink : AppColors.surface,
+                              color: outlined
+                                  ? AppColors.ink
+                                  : AppColors.surface,
                             ),
                           ),
                         ),

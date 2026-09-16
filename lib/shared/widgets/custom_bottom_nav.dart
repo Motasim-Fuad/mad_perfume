@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
 import 'package:madperfume/core/constants/app_sizes.dart';
-import 'package:madperfume/features/shell/presentation/controllers/shell_controller.dart';
+import 'package:madperfume/features/shell/presentation/cubit/shell_cubit.dart';
 import 'package:madperfume/shared/widgets/bottom_nav_item.dart';
 
 class CustomBottomNav extends StatelessWidget {
@@ -10,7 +11,7 @@ class CustomBottomNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<ShellController>();
+    final controller = context.read<ShellCubit>();
     return Material(
       type: MaterialType.transparency,
       child: SafeArea(
@@ -33,37 +34,37 @@ class CustomBottomNav extends StatelessWidget {
               height: AppSizes.navHeight,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                child: Obx(
-                  () => Row(
+                child: BlocBuilder<ShellCubit, ShellState>(
+                  builder: (context, state) => Row(
                     children: [
                       BottomNavItem(
                         icon: Icons.home_outlined,
                         label: 'home'.tr,
-                        selected: controller.tabIndex.value == 0,
+                        selected: state.tabIndex == 0,
                         onTap: () => controller.setTab(0),
                       ),
                       BottomNavItem(
                         icon: Icons.shopping_bag_outlined,
                         label: 'products'.tr,
-                        selected: controller.tabIndex.value == 1,
+                        selected: state.tabIndex == 1,
                         onTap: () => controller.setTab(1),
                       ),
                       BottomNavItem(
                         icon: Icons.shopping_cart_outlined,
                         label: 'cart'.tr,
-                        selected: controller.tabIndex.value == 2,
+                        selected: state.tabIndex == 2,
                         onTap: () => controller.setTab(2),
                       ),
                       BottomNavItem(
                         icon: Icons.workspace_premium_outlined,
                         label: 'loyalty'.tr,
-                        selected: controller.tabIndex.value == 3,
+                        selected: state.tabIndex == 3,
                         onTap: () => controller.setTab(3),
                       ),
                       BottomNavItem(
                         icon: Icons.person_outline,
                         label: 'profile'.tr,
-                        selected: controller.tabIndex.value == 4,
+                        selected: state.tabIndex == 4,
                         onTap: () => controller.setTab(4),
                       ),
                     ],

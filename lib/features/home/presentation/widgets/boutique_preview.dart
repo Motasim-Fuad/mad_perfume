@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
-import 'package:madperfume/core/constants/catalog_data.dart';
+import 'package:madperfume/core/models/catalog_models.dart';
 import 'package:madperfume/shared/widgets/remote_image.dart';
 
 class BoutiquePreview extends StatelessWidget {
@@ -13,9 +13,9 @@ class BoutiquePreview extends StatelessWidget {
     required this.onOpen,
   });
 
-  final List<BranchEntity> branches;
+  final List<BranchModel> branches;
   final VoidCallback onViewAll;
-  final ValueChanged<String> onOpen;
+  final ValueChanged<int> onOpen;
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +29,21 @@ class BoutiquePreview extends StatelessWidget {
                 'our_boutiques'.tr,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.cormorantGaramond(fontSize: 24, fontWeight: FontWeight.w600),
+                style: GoogleFonts.cormorantGaramond(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
             TextButton(
               onPressed: onViewAll,
               child: Text(
                 'view_all'.tr,
-                style: GoogleFonts.dmSans(fontSize: 11, letterSpacing: 1.2, color: AppColors.muted),
+                style: GoogleFonts.dmSans(
+                  fontSize: 11,
+                  letterSpacing: 1.2,
+                  color: AppColors.muted,
+                ),
               ),
             ),
           ],
@@ -54,7 +61,10 @@ class BoutiquePreview extends StatelessWidget {
                   child: Stack(
                     fit: StackFit.expand,
                     children: [
-                      RemoteImage(url: branch.imageUrl, label: 'boutique image here'),
+                      RemoteImage(
+                        url: branch.imageUrl,
+                        label: 'boutique image here',
+                      ),
                       DecoratedBox(
                         decoration: BoxDecoration(
                           gradient: LinearGradient(

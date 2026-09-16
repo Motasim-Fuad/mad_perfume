@@ -28,7 +28,10 @@ class PayTile extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(selected ? Icons.radio_button_checked : Icons.radio_button_off, size: 20),
+            Icon(
+              selected ? Icons.radio_button_checked : Icons.radio_button_off,
+              size: 20,
+            ),
             const SizedBox(width: 10),
             Expanded(
               child: Text(

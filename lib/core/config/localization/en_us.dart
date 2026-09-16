@@ -34,7 +34,8 @@ const Map<String, String> enUs = {
   'didnt_receive': "Didn't receive the code?",
   'resend_code': 'RESEND CODE',
   'forgot_title': 'Forgot Password',
-  'forgot_body': 'Enter your registered email and we will send a verification code.',
+  'forgot_body':
+      'Enter your registered email and we will send a verification code.',
   'send_code': 'SEND CODE',
   'hello': 'Hello, Beautiful',
   'discover_scent': 'Discover your scent.',
@@ -51,7 +52,8 @@ const Map<String, String> enUs = {
   'loyalty': 'Loyalty',
   'profile': 'Profile',
   'notifications': 'Notifications',
-  'notifications_subtitle': 'Stay updated on your scents, rewards, and exclusive offers.',
+  'notifications_subtitle':
+      'Stay updated on your scents, rewards, and exclusive offers.',
   'all_updates': 'ALL UPDATES',
   'offers': 'OFFERS',
   'reward': 'REWARD',
@@ -121,9 +123,11 @@ const Map<String, String> enUs = {
   'total_points_available': 'TOTAL POINTS AVAILABLE',
   'platinum': 'Platinum',
   'earn_points': 'Earn Points',
-  'earn_points_copy': 'Explore new scents and share your experience to collect more rewards.',
+  'earn_points_copy':
+      'Explore new scents and share your experience to collect more rewards.',
   'redeem_rewards': 'Redeem Rewards',
-  'redeem_rewards_copy': 'Use your points for exclusive products, boutique experiences, and curated collections.',
+  'redeem_rewards_copy':
+      'Use your points for exclusive products, boutique experiences, and curated collections.',
   'explore_rewards': 'EXPLORE REWARDS',
   'view_rewards_journey': 'VIEW REWARDS JOURNEY',
   'recent_activity': 'RECENT ACTIVITY',
@@ -139,14 +143,18 @@ const Map<String, String> enUs = {
       'Visit any of our flagship ateliers and present your digital wallet for a points lift on your signature scent.',
   'rewards_experience': 'The Rewards Experience',
   'step_browse': 'Browse',
-  'step_browse_copy': 'Browse our curated catalogue of niche fragrances and boutique extras.',
+  'step_browse_copy':
+      'Browse our curated catalogue of niche fragrances and boutique extras.',
   'step_collect': 'Collect',
-  'step_collect_copy': 'Points are automatically added to your digital wallet upon successful checkout.',
+  'step_collect_copy':
+      'Points are automatically added to your digital wallet upon successful checkout.',
   'step_redeem': 'Redeem',
-  'step_redeem_copy': 'Use your points for exclusive discounts, atelier access, or gift experiences.',
+  'step_redeem_copy':
+      'Use your points for exclusive discounts, atelier access, or gift experiences.',
   'rewards': 'REWARDS',
   'exclusive_rewards': 'Exclusive Rewards',
-  'exclusive_rewards_copy': 'Exchange your points for luxury experiences and limited editions.',
+  'exclusive_rewards_copy':
+      'Exchange your points for luxury experiences and limited editions.',
   'view_personal_rewards': 'VIEW PERSONAL REWARDS',
   'redeem': 'REDEEM',
   'redeemed': 'Redeemed',
@@ -179,7 +187,8 @@ const Map<String, String> enUs = {
   'update_password_btn': 'UPDATE PASSWORD',
   'stay_inspired': 'STAY INSPIRED',
   'preference_center': 'Preference Center',
-  'preference_copy': 'Keep yourself inspired by selecting which scent stories find their way to you.',
+  'preference_copy':
+      'Keep yourself inspired by selecting which scent stories find their way to you.',
   'promotional_offers': 'Promotional Offers',
   'exclusive_releases': 'Exclusive Releases',
   'member_status_update': 'Member Status Update',
@@ -202,7 +211,8 @@ const Map<String, String> enUs = {
   'required_field': 'This field is required',
   'invalid_email': 'Enter a valid email',
   'invalid_phone': 'Enter a valid phone number',
-  'invalid_password': 'Password must be at least 6 characters',
+  'invalid_password':
+      'Password must be at least 8 characters with a number and special character',
   'password_mismatch': 'Passwords do not match',
   'invalid_code': 'Enter the 6-digit code',
   'login_failed': 'Unable to sign in with these details',
@@ -232,6 +242,10 @@ const Map<String, String> enUs = {
   'rating_required': 'Select a rating',
   'code_sent': 'Code sent',
   'social_continue': 'Continue',
+  'social_unavailable':
+      'Google and Apple sign-in are not available in the provided API',
+  'stripe_unavailable':
+      'Card payment requires Stripe PaymentSheet configuration',
   'filter': 'Filter',
   'newest': 'Newest',
   'price': 'Price',

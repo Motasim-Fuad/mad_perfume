@@ -26,7 +26,10 @@ class OtpBoxes extends StatelessWidget {
         filled: true,
         fillColor: AppColors.surface,
         hintText: '------',
-        hintStyle: GoogleFonts.dmSans(letterSpacing: 10, color: AppColors.muted),
+        hintStyle: GoogleFonts.dmSans(
+          letterSpacing: 10,
+          color: AppColors.muted,
+        ),
         contentPadding: const EdgeInsets.symmetric(vertical: 18),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(18),
