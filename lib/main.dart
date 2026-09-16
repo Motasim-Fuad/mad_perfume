@@ -24,7 +24,6 @@ Future<void> main() async {
     () => LocaleService(storage).init(),
     permanent: true,
   );
-  await sl<AuthCubit>().restore();
   runApp(MadPerfumeApp(locale: localeService.locale.value));
 }
 

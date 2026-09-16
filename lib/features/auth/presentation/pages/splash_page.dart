@@ -17,13 +17,19 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    Future<void>.delayed(const Duration(milliseconds: 1600), () {
-      if (!mounted) {
-        return;
-      }
-      final loggedIn = context.read<AuthCubit>().state.isLoggedIn;
-      Get.offAllNamed(loggedIn ? AppRoutes.main : AppRoutes.welcome);
-    });
+    _bootstrap();
+  }
+
+  Future<void> _bootstrap() async {
+    final auth = context.read<AuthCubit>();
+    await Future.wait([
+      auth.restore(),
+      Future<void>.delayed(const Duration(milliseconds: 1600)),
+    ]);
+    if (!mounted) {
+      return;
+    }
+    Get.offAllNamed(auth.state.isLoggedIn ? AppRoutes.main : AppRoutes.welcome);
   }
 
   @override
