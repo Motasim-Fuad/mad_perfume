@@ -11,11 +11,13 @@ class OrderReviewItem extends StatelessWidget {
     super.key,
     required this.item,
     required this.reviewed,
+    required this.canReview,
     required this.onReview,
   });
 
   final OrderItemModel item;
   final bool reviewed;
+  final bool canReview;
   final VoidCallback onReview;
 
   @override
@@ -63,7 +65,7 @@ class OrderReviewItem extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: GoogleFonts.dmSans(fontSize: 12, color: AppColors.muted),
               )
-            else
+            else if (canReview)
               Align(
                 alignment: AlignmentDirectional.centerStart,
                 child: TextButton(

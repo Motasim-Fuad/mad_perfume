@@ -13,6 +13,7 @@ import 'package:madperfume/features/commerce/presentation/cubit/checkout_cubit.d
 import 'package:madperfume/features/home/presentation/cubit/home_cubit.dart';
 import 'package:madperfume/features/loyalty/data/loyalty_repository.dart';
 import 'package:madperfume/features/loyalty/presentation/cubit/loyalty_cubits.dart';
+import 'package:madperfume/features/orders/data/reviewed_product_store.dart';
 import 'package:madperfume/features/profile/presentation/cubit/profile_cubits.dart';
 
 final sl = GetIt.instance;
@@ -31,6 +32,7 @@ void setupLocator() {
   sl.registerLazySingleton(() => CartRepository(sl()));
   sl.registerLazySingleton(() => OrderRepository(sl()));
   sl.registerLazySingleton(() => LoyaltyRepository(sl()));
+  sl.registerLazySingleton(() => ReviewedProductStore(sl()));
 
   sl.registerLazySingleton(() => AuthCubit(sl(), sl()));
   sl.registerLazySingleton(() => CartCubit(sl()));
@@ -63,15 +65,26 @@ void setupLocator() {
     (id, _) => ProductDetailsCubit(sl(), sl<CartCubit>(), id),
   );
   sl.registerFactoryParam<OrderDetailCubit, int, void>(
-    (id, _) => OrderDetailCubit(sl(), id),
+    (id, _) => OrderDetailCubit(
+      sl(),
+      sl(),
+      sl<AuthCubit>().state.profile?.id ?? 0,
+      id,
+    ),
   );
   sl.registerFactoryParam<RewardDetailCubit, int, void>(
-    (id, _) => RewardDetailCubit(sl(), id),
+    (id, _) => RewardDetailCubit(sl(), sl<AuthCubit>(), id),
   );
   sl.registerFactoryParam<BranchDetailCubit, int, void>(
     (id, _) => BranchDetailCubit(sl(), id),
   );
   sl.registerFactoryParam<WriteReviewCubit, int, void>(
-    (id, _) => WriteReviewCubit(sl(), id),
+    (id, _) => WriteReviewCubit(
+      sl(),
+      sl(),
+      sl<AuthCubit>(),
+      sl<AuthCubit>().state.profile?.id ?? 0,
+      id,
+    ),
   );
 }

@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:madperfume/config/routes/app_routes.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
 import 'package:madperfume/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:madperfume/shared/widgets/animated_circular_loader.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -67,6 +68,8 @@ class _SplashPageState extends State<SplashPage> {
                 color: AppColors.muted,
               ),
             ),
+            const SizedBox(height: 28),
+            const AnimatedCircularLoader(size: 30),
           ],
         ),
       ),

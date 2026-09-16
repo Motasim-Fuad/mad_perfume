@@ -6,6 +6,7 @@ import 'package:madperfume/core/constants/app_colors.dart';
 import 'package:madperfume/features/profile/presentation/cubit/profile_cubits.dart';
 import 'package:madperfume/features/branches/presentation/widgets/branch_list_card.dart';
 import 'package:madperfume/shared/widgets/brand_header.dart';
+import 'package:madperfume/shared/widgets/query_body.dart';
 import 'package:madperfume/shared/widgets/screen_scaffold.dart';
 
 class BranchesPage extends StatelessWidget {
@@ -50,7 +51,8 @@ class BranchesPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 TextField(
-                  onSubmitted: controller.search,
+                  onChanged: controller.search,
+                  onSubmitted: controller.searchNow,
                   decoration: InputDecoration(
                     hintText: 'search_city'.tr,
                     prefixIcon: const Icon(Icons.search),
@@ -69,18 +71,24 @@ class BranchesPage extends StatelessWidget {
             child: BlocBuilder<BranchesCubit, BranchesState>(
               builder: (context, state) {
                 final items = state.items;
-                return ListView.separated(
-                  padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
-                  itemCount: items.length,
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: 14),
-                  itemBuilder: (context, index) {
-                    final branch = items[index];
-                    return BranchListCard(
-                      branch: branch,
-                      onTap: () => controller.open(branch.id),
-                    );
-                  },
+                return QueryBody(
+                  loading: state.loading,
+                  error: state.error,
+                  empty: items.isEmpty,
+                  emptyMessage: 'no_results'.tr,
+                  child: ListView.separated(
+                    padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
+                    itemCount: items.length,
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 14),
+                    itemBuilder: (context, index) {
+                      final branch = items[index];
+                      return BranchListCard(
+                        branch: branch,
+                        onTap: () => controller.open(branch.id),
+                      );
+                    },
+                  ),
                 );
               },
             ),

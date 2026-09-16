@@ -48,6 +48,7 @@ class ProductListPage extends StatelessWidget {
                   children: [
                     Expanded(
                       child: TextField(
+                        onChanged: controller.searchAsYouType,
                         onSubmitted: (value) => controller.load(search: value),
                         decoration: InputDecoration(
                           hintText: 'search_products'.tr,

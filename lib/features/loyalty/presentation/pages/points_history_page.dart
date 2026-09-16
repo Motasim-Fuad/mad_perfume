@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:madperfume/features/loyalty/presentation/cubit/loyalty_cubits.dart';
 import 'package:madperfume/features/loyalty/presentation/widgets/history_filter_chip.dart';
 import 'package:madperfume/shared/widgets/brand_header.dart';
+import 'package:madperfume/shared/widgets/query_body.dart';
 import 'package:madperfume/shared/widgets/screen_scaffold.dart';
 
 class PointsHistoryPage extends StatelessWidget {
@@ -49,26 +50,34 @@ class PointsHistoryPage extends StatelessWidget {
             child: BlocBuilder<HistoryCubit, HistoryState>(
               builder: (context, state) {
                 final items = state.items;
-                return ListView.separated(
-                  padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
-                  itemCount: items.length,
-                  separatorBuilder: (context, index) => const Divider(),
-                  itemBuilder: (context, index) {
-                    final entry = items[index];
-                    return ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      title: Text(
-                        entry.title,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      subtitle: Text(entry.createdAt),
-                      trailing: Text(
-                        '${entry.points > 0 ? '+' : ''}${entry.points}',
-                        style: GoogleFonts.dmSans(fontWeight: FontWeight.w700),
-                      ),
-                    );
-                  },
+                return QueryBody(
+                  loading: state.loading,
+                  error: state.error,
+                  empty: items.isEmpty,
+                  onRetry: () => controller.load(filter: state.filter),
+                  child: ListView.separated(
+                    padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+                    itemCount: items.length,
+                    separatorBuilder: (context, index) => const Divider(),
+                    itemBuilder: (context, index) {
+                      final entry = items[index];
+                      return ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        title: Text(
+                          entry.title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        subtitle: Text(entry.createdAt),
+                        trailing: Text(
+                          '${entry.points > 0 ? '+' : ''}${entry.points}',
+                          style: GoogleFonts.dmSans(
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 );
               },
             ),

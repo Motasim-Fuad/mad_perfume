@@ -7,6 +7,7 @@ import 'package:madperfume/features/catalog/presentation/cubit/catalog_cubits.da
 import 'package:madperfume/features/products/presentation/widgets/product_reviews_block.dart';
 import 'package:madperfume/shared/widgets/brand_chrome.dart';
 import 'package:madperfume/shared/widgets/custom_button.dart';
+import 'package:madperfume/shared/widgets/app_toast.dart';
 import 'package:madperfume/shared/widgets/remote_image.dart';
 import 'package:madperfume/shared/widgets/query_body.dart';
 
@@ -19,7 +20,11 @@ class ProductDetailsPage extends StatelessWidget {
     return ScreenScaffold(
       padding: EdgeInsets.zero,
       header: const BrandHeader(showBack: true),
-      child: BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
+      child: BlocConsumer<ProductDetailsCubit, ProductDetailsState>(
+        listenWhen: (before, after) =>
+            before.cartAddSuccess != after.cartAddSuccess,
+        listener: (context, state) =>
+            AppToast.success(context, 'product_added_successfully'.tr),
         builder: (context, state) => QueryBody(
           loading: state.loading,
           error: state.error,
@@ -129,6 +134,7 @@ class ProductDetailsPage extends StatelessWidget {
                 AppButton(
                   label: 'add_to_cart'.tr,
                   loading: state.busy,
+                  error: state.actionError,
                   onPressed: product.inStock ? controller.addToCart : null,
                 ),
               ],

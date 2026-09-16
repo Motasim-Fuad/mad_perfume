@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -65,8 +67,12 @@ class ProductListCubit extends Cubit<ProductListState> {
   final int categoryId;
   String _search = '';
   bool _newest = true;
+  Timer? _searchTimer;
+  int _searchGeneration = 0;
+  int _requestGeneration = 0;
 
   Future<void> load({String? search, bool? newest}) async {
+    final requestGeneration = ++_requestGeneration;
     if (search != null) {
       _search = search.trim();
     }
@@ -90,15 +96,19 @@ class ProductListCubit extends Cubit<ProductListState> {
             .map((item) => item.name)
             .firstWhere((item) => item.isNotEmpty, orElse: () => '');
       }
-      emit(
-        ProductListState(
-          items: page.results,
-          loading: false,
-          categoryName: name,
-        ),
-      );
+      if (requestGeneration == _requestGeneration) {
+        emit(
+          ProductListState(
+            items: page.results,
+            loading: false,
+            categoryName: name,
+          ),
+        );
+      }
     } on ApiException catch (error) {
-      emit(ProductListState(loading: false, error: error.message));
+      if (requestGeneration == _requestGeneration) {
+        emit(ProductListState(loading: false, error: error.message));
+      }
     }
   }
 
@@ -106,7 +116,23 @@ class ProductListCubit extends Cubit<ProductListState> {
 
   Future<void> toggleSort() => load(newest: !_newest);
 
+  void searchAsYouType(String value) {
+    _searchTimer?.cancel();
+    final generation = ++_searchGeneration;
+    _searchTimer = Timer(const Duration(milliseconds: 350), () {
+      if (generation == _searchGeneration) {
+        load(search: value);
+      }
+    });
+  }
+
   void open(int id) => Get.toNamed(AppRoutes.productDetails, arguments: id);
+
+  @override
+  Future<void> close() {
+    _searchTimer?.cancel();
+    return super.close();
+  }
 }
 
 class ProductDetailsState extends Equatable {
@@ -116,6 +142,8 @@ class ProductDetailsState extends Equatable {
     this.loading = true,
     this.busy = false,
     this.error = '',
+    this.actionError = '',
+    this.cartAddSuccess = 0,
   });
 
   final ProductModel? product;
@@ -123,9 +151,19 @@ class ProductDetailsState extends Equatable {
   final bool loading;
   final bool busy;
   final String error;
+  final String actionError;
+  final int cartAddSuccess;
 
   @override
-  List<Object?> get props => [product, reviews, loading, busy, error];
+  List<Object?> get props => [
+    product,
+    reviews,
+    loading,
+    busy,
+    error,
+    actionError,
+    cartAddSuccess,
+  ];
 }
 
 class ProductDetailsCubit extends Cubit<ProductDetailsState> {
@@ -169,6 +207,8 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
           product: product.copyWith(isSaved: !product.isSaved),
           reviews: state.reviews,
           loading: false,
+          cartAddSuccess: state.cartAddSuccess,
+          actionError: '',
         ),
       );
     } on ApiException catch (error) {
@@ -177,7 +217,8 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
           product: product,
           reviews: state.reviews,
           loading: false,
-          error: error.message,
+          actionError: error.message,
+          cartAddSuccess: state.cartAddSuccess,
         ),
       );
     }
@@ -194,6 +235,8 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
         reviews: state.reviews,
         loading: false,
         busy: true,
+        cartAddSuccess: state.cartAddSuccess,
+        actionError: '',
       ),
     );
     try {
@@ -203,6 +246,8 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
           product: product,
           reviews: state.reviews,
           loading: false,
+          cartAddSuccess: state.cartAddSuccess + 1,
+          actionError: '',
         ),
       );
     } on ApiException catch (error) {
@@ -211,7 +256,8 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
           product: product,
           reviews: state.reviews,
           loading: false,
-          error: error.message,
+          actionError: error.message,
+          cartAddSuccess: state.cartAddSuccess,
         ),
       );
     }
@@ -239,18 +285,49 @@ class SearchCubit extends Cubit<SearchState> {
   SearchCubit(this._catalog) : super(const SearchState());
 
   final CatalogRepository _catalog;
+  Timer? _debounce;
+  int _generation = 0;
 
-  Future<void> search(String query) async {
+  void search(String query) {
+    _debounce?.cancel();
+    final generation = ++_generation;
+    if (query.trim().isEmpty) {
+      emit(const SearchState());
+      return;
+    }
+    _debounce = Timer(
+      const Duration(milliseconds: 350),
+      () => _runSearch(query, generation),
+    );
+  }
+
+  Future<void> searchNow(String query) async {
+    _debounce?.cancel();
+    final generation = ++_generation;
+    await _runSearch(query, generation);
+  }
+
+  Future<void> _runSearch(String query, int generation) async {
     emit(SearchState(query: query, loading: true));
     try {
       final page = await _catalog.products(
         search: query.trim().isEmpty ? null : query.trim(),
       );
-      emit(SearchState(query: query, items: page.results, loading: false));
+      if (generation == _generation) {
+        emit(SearchState(query: query, items: page.results, loading: false));
+      }
     } on ApiException catch (error) {
-      emit(SearchState(query: query, loading: false, error: error.message));
+      if (generation == _generation) {
+        emit(SearchState(query: query, loading: false, error: error.message));
+      }
     }
   }
 
   void open(int id) => Get.toNamed(AppRoutes.productDetails, arguments: id);
+
+  @override
+  Future<void> close() {
+    _debounce?.cancel();
+    return super.close();
+  }
 }

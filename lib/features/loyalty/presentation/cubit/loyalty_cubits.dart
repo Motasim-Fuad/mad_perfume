@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:madperfume/config/routes/app_routes.dart';
 import 'package:madperfume/core/error/api_exception.dart';
 import 'package:madperfume/core/models/loyalty_models.dart';
+import 'package:madperfume/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:madperfume/features/loyalty/data/loyalty_repository.dart';
 
 class LoyaltyState extends Equatable {
@@ -22,7 +23,11 @@ class LoyaltyState extends Equatable {
 }
 
 class LoyaltyCubit extends Cubit<LoyaltyState> {
-  LoyaltyCubit(this._repository) : super(const LoyaltyState());
+  LoyaltyCubit(this._repository) : super(const LoyaltyState()) {
+    instance = this;
+  }
+
+  static LoyaltyCubit? instance;
 
   final LoyaltyRepository _repository;
 
@@ -40,6 +45,14 @@ class LoyaltyCubit extends Cubit<LoyaltyState> {
   void openRewards() => Get.toNamed(AppRoutes.rewards);
   void openRedeemed() => Get.toNamed(AppRoutes.redeemedRewards);
   void openHistory() => Get.toNamed(AppRoutes.pointsHistory);
+
+  @override
+  Future<void> close() {
+    if (identical(instance, this)) {
+      instance = null;
+    }
+    return super.close();
+  }
 }
 
 class RewardsState extends Equatable {
@@ -81,6 +94,7 @@ class RewardDetailState extends Equatable {
     this.loading = true,
     this.busy = false,
     this.error = '',
+    this.actionError = '',
     this.voucher,
   });
 
@@ -88,17 +102,26 @@ class RewardDetailState extends Equatable {
   final bool loading;
   final bool busy;
   final String error;
+  final String actionError;
   final RedemptionModel? voucher;
 
   @override
-  List<Object?> get props => [reward, loading, busy, error, voucher];
+  List<Object?> get props => [
+    reward,
+    loading,
+    busy,
+    error,
+    actionError,
+    voucher,
+  ];
 }
 
 class RewardDetailCubit extends Cubit<RewardDetailState> {
-  RewardDetailCubit(this._repository, this.rewardId)
+  RewardDetailCubit(this._repository, this._auth, this.rewardId)
     : super(const RewardDetailState());
 
   final LoyaltyRepository _repository;
+  final AuthCubit _auth;
   final int rewardId;
 
   Future<void> load() async {
@@ -116,19 +139,33 @@ class RewardDetailCubit extends Cubit<RewardDetailState> {
     if (reward == null || !reward.canRedeem) {
       return;
     }
-    emit(RewardDetailState(reward: reward, loading: false, busy: true));
+    emit(
+      RewardDetailState(
+        reward: reward,
+        loading: false,
+        busy: true,
+        actionError: '',
+      ),
+    );
     try {
       final voucher = await _repository.redeem(reward.id);
+      await _auth.refreshProfile();
+      await LoyaltyCubit.instance?.load();
       emit(
         RewardDetailState(
           reward: reward.copyCanRedeem(false),
           loading: false,
           voucher: voucher,
+          actionError: '',
         ),
       );
     } on ApiException catch (error) {
       emit(
-        RewardDetailState(reward: reward, loading: false, error: error.message),
+        RewardDetailState(
+          reward: reward,
+          loading: false,
+          actionError: error.message,
+        ),
       );
     }
   }

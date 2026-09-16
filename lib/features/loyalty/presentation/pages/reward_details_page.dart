@@ -6,6 +6,7 @@ import 'package:madperfume/core/constants/app_colors.dart';
 import 'package:madperfume/features/loyalty/presentation/cubit/loyalty_cubits.dart';
 import 'package:madperfume/shared/widgets/brand_header.dart';
 import 'package:madperfume/shared/widgets/custom_button.dart';
+import 'package:madperfume/shared/widgets/glossy_card.dart';
 import 'package:madperfume/shared/widgets/remote_image.dart';
 import 'package:madperfume/shared/widgets/screen_scaffold.dart';
 import 'package:madperfume/shared/widgets/query_body.dart';
@@ -81,12 +82,46 @@ class RewardDetailsPage extends StatelessWidget {
                   style: GoogleFonts.dmSans(color: AppColors.muted),
                 ),
                 const SizedBox(height: 16),
+                if (state.voucher case final voucher?) ...[
+                  GlossyCard(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'voucher_code'.tr,
+                          style: GoogleFonts.dmSans(
+                            fontSize: 11,
+                            color: AppColors.muted,
+                            letterSpacing: 1.2,
+                          ),
+                        ),
+                        SelectableText(
+                          voucher.voucherCode,
+                          style: GoogleFonts.dmSans(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: 2,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'reward_claim_copy'.tr,
+                          style: GoogleFonts.dmSans(
+                            color: AppColors.inkSoft,
+                            height: 1.45,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                ],
                 AppButton(
                   label: state.voucher != null
                       ? 'redeemed'.tr
                       : 'redeem_now'.tr,
                   loading: state.busy,
-                  error: state.error,
+                  error: state.actionError,
                   onPressed: reward.canRedeem && state.voucher == null
                       ? controller.redeem
                       : null,

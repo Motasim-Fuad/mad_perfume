@@ -1,7 +1,11 @@
+import 'dart:async';
+import 'dart:typed_data';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:madperfume/config/routes/app_routes.dart';
 import 'package:madperfume/core/error/api_exception.dart';
 import 'package:madperfume/core/models/catalog_models.dart';
@@ -11,6 +15,8 @@ import 'package:madperfume/features/auth/data/auth_repository.dart';
 import 'package:madperfume/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:madperfume/features/catalog/data/catalog_repository.dart';
 import 'package:madperfume/features/commerce/data/commerce_repository.dart';
+import 'package:madperfume/features/orders/data/reviewed_product_store.dart';
+import 'package:madperfume/features/loyalty/presentation/cubit/loyalty_cubits.dart';
 
 class ProfileHomeState extends Equatable {
   const ProfileHomeState({
@@ -59,9 +65,10 @@ class ProfileHomeCubit extends Cubit<ProfileHomeState> {
   void openOrder(int id) => Get.toNamed(AppRoutes.orderDetails, arguments: id);
 }
 
-class EditProfileCubit extends Cubit<({bool loading, String error})> {
+class EditProfileCubit
+    extends Cubit<({bool loading, String error, Uint8List? avatarBytes})> {
   EditProfileCubit(this._authCubit, ProfileModel profile)
-    : super((loading: false, error: '')) {
+    : super((loading: false, error: '', avatarBytes: null)) {
     name.text = profile.fullName;
     email.text = profile.email;
     phone.text = profile.phone;
@@ -73,13 +80,41 @@ class EditProfileCubit extends Cubit<({bool loading, String error})> {
   final email = TextEditingController();
   final phone = TextEditingController();
   final address = TextEditingController();
+  XFile? _avatar;
+
+  Future<void> pickAvatar() async {
+    final image = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 88,
+    );
+    if (image == null) {
+      return;
+    }
+    final extension = image.name.split('.').last.toLowerCase();
+    final validType = {'png', 'jpg', 'jpeg', 'webp'}.contains(extension);
+    final validSize = await image.length() <= 10 * 1024 * 1024;
+    if (!validType || !validSize) {
+      emit((
+        loading: false,
+        error: 'invalid_avatar'.tr,
+        avatarBytes: state.avatarBytes,
+      ));
+      return;
+    }
+    _avatar = image;
+    emit((loading: false, error: '', avatarBytes: await image.readAsBytes()));
+  }
 
   Future<void> save() async {
     if (name.text.trim().isEmpty) {
-      emit((loading: false, error: 'required_field'.tr));
+      emit((
+        loading: false,
+        error: 'required_field'.tr,
+        avatarBytes: state.avatarBytes,
+      ));
       return;
     }
-    emit((loading: true, error: ''));
+    emit((loading: true, error: '', avatarBytes: state.avatarBytes));
     try {
       final profile = await _authCubit.patchProfile({
         'full_name': name.text.trim(),
@@ -88,13 +123,32 @@ class EditProfileCubit extends Cubit<({bool loading, String error})> {
         'shipping_address': address.text.trim(),
       });
       if (profile == null) {
-        emit((loading: false, error: _authCubit.state.error));
+        emit((
+          loading: false,
+          error: _authCubit.state.error,
+          avatarBytes: state.avatarBytes,
+        ));
         return;
       }
-      emit((loading: false, error: ''));
+      if (_avatar != null) {
+        final uploaded = await _authCubit.uploadAvatar(_avatar!);
+        if (uploaded == null) {
+          emit((
+            loading: false,
+            error: _authCubit.state.error,
+            avatarBytes: state.avatarBytes,
+          ));
+          return;
+        }
+      }
+      emit((loading: false, error: '', avatarBytes: state.avatarBytes));
       Get.back();
     } on ApiException catch (error) {
-      emit((loading: false, error: error.message));
+      emit((
+        loading: false,
+        error: error.message,
+        avatarBytes: state.avatarBytes,
+      ));
     }
   }
 
@@ -207,20 +261,47 @@ class BranchesCubit extends Cubit<BranchesState> {
   BranchesCubit(this._catalog) : super(const BranchesState());
 
   final CatalogRepository _catalog;
+  Timer? _debounce;
+  int _generation = 0;
 
-  Future<void> search(String query) async {
+  void search(String query) {
+    _debounce?.cancel();
+    final generation = ++_generation;
+    _debounce = Timer(
+      const Duration(milliseconds: 350),
+      () => _load(query, generation),
+    );
+  }
+
+  Future<void> searchNow(String query) async {
+    _debounce?.cancel();
+    final generation = ++_generation;
+    await _load(query, generation);
+  }
+
+  Future<void> _load(String query, int generation) async {
     emit(const BranchesState(loading: true));
     try {
       final page = await _catalog.branches(
         search: query.trim().isEmpty ? null : query.trim(),
       );
-      emit(BranchesState(items: page.results, loading: false));
+      if (generation == _generation) {
+        emit(BranchesState(items: page.results, loading: false));
+      }
     } on ApiException catch (error) {
-      emit(BranchesState(loading: false, error: error.message));
+      if (generation == _generation) {
+        emit(BranchesState(loading: false, error: error.message));
+      }
     }
   }
 
   void open(int id) => Get.toNamed(AppRoutes.branchDetails, arguments: id);
+
+  @override
+  Future<void> close() {
+    _debounce?.cancel();
+    return super.close();
+  }
 }
 
 class BranchDetailCubit
@@ -244,10 +325,18 @@ class BranchDetailCubit
 
 class WriteReviewCubit
     extends Cubit<({int rating, bool loading, String error})> {
-  WriteReviewCubit(this._catalog, this.productId)
-    : super((rating: 5, loading: false, error: ''));
+  WriteReviewCubit(
+    this._catalog,
+    this._reviewedStore,
+    this._authCubit,
+    this.userId,
+    this.productId,
+  ) : super((rating: 5, loading: false, error: ''));
 
   final CatalogRepository _catalog;
+  final ReviewedProductStore _reviewedStore;
+  final AuthCubit _authCubit;
+  final int userId;
   final int productId;
   final body = TextEditingController();
 
@@ -255,10 +344,6 @@ class WriteReviewCubit
       emit((rating: value, loading: false, error: state.error));
 
   Future<void> submit() async {
-    if (body.text.trim().isEmpty) {
-      emit((rating: state.rating, loading: false, error: 'review_hint'.tr));
-      return;
-    }
     emit((rating: state.rating, loading: true, error: ''));
     try {
       await _catalog.writeReview(
@@ -266,9 +351,17 @@ class WriteReviewCubit
         rating: state.rating,
         comment: body.text.trim(),
       );
+      await _reviewedStore.mark(userId: userId, productId: productId);
+      await _authCubit.refreshProfile();
+      await LoyaltyCubit.instance?.load();
       emit((rating: state.rating, loading: false, error: ''));
-      Get.back();
+      Get.back(result: true);
     } on ApiException catch (error) {
+      if (error.message.toLowerCase().contains('already reviewed')) {
+        await _reviewedStore.mark(userId: userId, productId: productId);
+        Get.back(result: true);
+        return;
+      }
       emit((rating: state.rating, loading: false, error: error.message));
     }
   }

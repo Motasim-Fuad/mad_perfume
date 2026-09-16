@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
 import 'package:madperfume/shared/widgets/empty_widget.dart';
-import 'package:madperfume/shared/widgets/loading_widget.dart';
+import 'package:madperfume/shared/widgets/shimmer_loading_list.dart';
 
 class QueryBody extends StatelessWidget {
   const QueryBody({
@@ -25,11 +25,12 @@ class QueryBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget body;
     if (loading) {
-      return const LoadingWidget();
-    }
-    if (error.isNotEmpty) {
-      return Center(
+      body = const ShimmerLoadingList();
+    } else if (error.isNotEmpty) {
+      body = Center(
+        key: const ValueKey('query-error'),
         child: Padding(
           padding: const EdgeInsets.all(24),
           child: Column(
@@ -48,10 +49,19 @@ class QueryBody extends StatelessWidget {
           ),
         ),
       );
+    } else if (empty) {
+      body = EmptyWidget(
+        key: const ValueKey('query-empty'),
+        message: emptyMessage ?? 'no_results'.tr,
+      );
+    } else {
+      body = KeyedSubtree(key: const ValueKey('query-content'), child: child);
     }
-    if (empty) {
-      return EmptyWidget(message: emptyMessage ?? 'no_results'.tr);
-    }
-    return child;
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 360),
+      switchInCurve: Curves.easeOutCubic,
+      switchOutCurve: Curves.easeInCubic,
+      child: body,
+    );
   }
 }

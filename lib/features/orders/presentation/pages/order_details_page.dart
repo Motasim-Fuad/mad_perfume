@@ -48,7 +48,12 @@ class OrderDetailsPage extends StatelessWidget {
                       .map(
                         (item) => OrderReviewItem(
                           item: item,
-                          reviewed: false,
+                          reviewed:
+                              item.product != null &&
+                              state.reviewedProductIds.contains(item.product),
+                          canReview:
+                              order.status == 'delivered' &&
+                              item.product != null,
                           onReview: item.product == null
                               ? () {}
                               : () => controller.review(item.product!),

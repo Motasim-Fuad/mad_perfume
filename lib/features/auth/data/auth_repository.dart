@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:madperfume/core/constants/api_endpoints.dart';
 import 'package:madperfume/core/models/catalog_models.dart';
 import 'package:madperfume/core/network/api_client.dart';
@@ -57,6 +58,19 @@ class AuthRepository {
     return _api.patch(
       ApiEndpoints.me,
       data: body,
+      parse: (data) => ProfileModel.fromJson(_map(data)),
+    );
+  }
+
+  Future<ProfileModel> uploadAvatar({
+    required List<int> bytes,
+    required String filename,
+  }) {
+    return _api.patch(
+      ApiEndpoints.me,
+      data: FormData.fromMap({
+        'avatar': MultipartFile.fromBytes(bytes, filename: filename),
+      }),
       parse: (data) => ProfileModel.fromJson(_map(data)),
     );
   }

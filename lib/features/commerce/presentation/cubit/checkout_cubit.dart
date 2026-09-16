@@ -8,6 +8,7 @@ import 'package:madperfume/core/models/catalog_models.dart';
 import 'package:madperfume/core/models/commerce_models.dart';
 import 'package:madperfume/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:madperfume/features/commerce/data/commerce_repository.dart';
+import 'package:madperfume/features/orders/data/reviewed_product_store.dart';
 import 'package:uuid/uuid.dart';
 
 class CheckoutState extends Equatable {
@@ -124,28 +125,42 @@ class OrdersCubit extends Cubit<OrdersState> {
 }
 
 class OrderDetailState extends Equatable {
-  const OrderDetailState({this.order, this.loading = true, this.error = ''});
+  const OrderDetailState({
+    this.order,
+    this.reviewedProductIds = const {},
+    this.loading = true,
+    this.error = '',
+  });
 
   final OrderModel? order;
+  final Set<int> reviewedProductIds;
   final bool loading;
   final String error;
 
   @override
-  List<Object?> get props => [order, loading, error];
+  List<Object?> get props => [order, reviewedProductIds, loading, error];
 }
 
 class OrderDetailCubit extends Cubit<OrderDetailState> {
-  OrderDetailCubit(this._orders, this.orderId)
+  OrderDetailCubit(this._orders, this._reviewedStore, this.userId, this.orderId)
     : super(const OrderDetailState());
 
   final OrderRepository _orders;
+  final ReviewedProductStore _reviewedStore;
+  final int userId;
   final int orderId;
 
   Future<void> load() async {
     emit(const OrderDetailState(loading: true));
     try {
       final order = await _orders.detail(orderId);
-      emit(OrderDetailState(order: order, loading: false));
+      emit(
+        OrderDetailState(
+          order: order,
+          reviewedProductIds: _reviewedStore.read(userId),
+          loading: false,
+        ),
+      );
     } on ApiException catch (error) {
       emit(OrderDetailState(loading: false, error: error.message));
     }
@@ -155,10 +170,19 @@ class OrderDetailCubit extends Cubit<OrderDetailState> {
 
   void home() => Get.offAllNamed(AppRoutes.main);
 
-  void review(int productId) {
-    Get.toNamed(
+  Future<void> review(int productId) async {
+    final reviewed = await Get.toNamed<bool>(
       AppRoutes.writeReview,
       arguments: {'productId': productId, 'orderId': orderId},
     );
+    if (reviewed == true) {
+      emit(
+        OrderDetailState(
+          order: state.order,
+          reviewedProductIds: {...state.reviewedProductIds, productId},
+          loading: false,
+        ),
+      );
+    }
   }
 }

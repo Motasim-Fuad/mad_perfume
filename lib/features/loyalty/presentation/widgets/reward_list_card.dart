@@ -54,8 +54,13 @@ class RewardListCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'redeem'.tr,
-                      style: GoogleFonts.dmSans(fontWeight: FontWeight.w700),
+                      reward.canRedeem ? 'redeem'.tr : 'unavailable'.tr,
+                      style: GoogleFonts.dmSans(
+                        fontWeight: FontWeight.w700,
+                        color: reward.canRedeem
+                            ? AppColors.ink
+                            : AppColors.muted,
+                      ),
                     ),
                   ],
                 ),

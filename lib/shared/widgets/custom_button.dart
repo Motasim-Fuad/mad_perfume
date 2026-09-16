@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
 import 'package:madperfume/core/constants/app_sizes.dart';
@@ -41,33 +42,26 @@ class AppButton extends StatelessWidget {
               customBorder: const StadiumBorder(),
               onTap: loading ? null : onPressed,
               child: Center(
-                child: loading
-                    ? SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 220),
+                  child: Padding(
+                    key: ValueKey(loading),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        loading ? 'please_wait'.tr : label,
+                        maxLines: 1,
+                        style: GoogleFonts.dmSans(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 1.4,
                           color: outlined ? AppColors.ink : AppColors.surface,
                         ),
-                      )
-                    : Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Text(
-                            label,
-                            maxLines: 1,
-                            style: GoogleFonts.dmSans(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w700,
-                              letterSpacing: 1.4,
-                              color: outlined
-                                  ? AppColors.ink
-                                  : AppColors.surface,
-                            ),
-                          ),
-                        ),
                       ),
+                    ),
+                  ),
+                ),
               ),
             ),
           ),

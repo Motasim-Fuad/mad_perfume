@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
+import 'package:madperfume/shared/widgets/app_shimmer.dart';
 
 class RemoteImage extends StatelessWidget {
   const RemoteImage({
@@ -49,18 +50,8 @@ class RemoteImage extends StatelessWidget {
       fit: fit,
       httpHeaders: _headers,
       fadeInDuration: const Duration(milliseconds: 180),
-      placeholder: (context, url) => const ColoredBox(
-        color: AppColors.surfaceMuted,
-        child: Center(
-          child: SizedBox(
-            width: 18,
-            height: 18,
-            child: CircularProgressIndicator(
-              strokeWidth: 1.6,
-              color: AppColors.muted,
-            ),
-          ),
-        ),
+      placeholder: (context, url) => AppShimmer(
+        child: ColoredBox(color: Colors.white, child: const SizedBox.expand()),
       ),
       errorWidget: (context, url, error) => fallback,
     );

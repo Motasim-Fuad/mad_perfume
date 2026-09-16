@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:madperfume/config/routes/app_routes.dart';
 import 'package:madperfume/core/error/api_exception.dart';
 import 'package:madperfume/core/models/catalog_models.dart';
@@ -254,6 +255,20 @@ class AuthCubit extends Cubit<AuthState> {
   Future<ProfileModel?> patchProfile(Map<String, dynamic> body) async {
     try {
       final profile = await _repository.updateMe(body);
+      emit(state.copyWith(profile: profile, error: ''));
+      return profile;
+    } on ApiException catch (error) {
+      emit(state.copyWith(error: error.message));
+      return null;
+    }
+  }
+
+  Future<ProfileModel?> uploadAvatar(XFile image) async {
+    try {
+      final profile = await _repository.uploadAvatar(
+        bytes: await image.readAsBytes(),
+        filename: image.name,
+      );
       emit(state.copyWith(profile: profile, error: ''));
       return profile;
     } on ApiException catch (error) {

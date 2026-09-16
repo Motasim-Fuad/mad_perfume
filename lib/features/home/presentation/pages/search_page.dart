@@ -23,7 +23,8 @@ class SearchPage extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
             child: TextField(
               autofocus: true,
-              onSubmitted: controller.search,
+              onChanged: controller.search,
+              onSubmitted: controller.searchNow,
               textInputAction: TextInputAction.search,
               decoration: InputDecoration(
                 hintText: 'search_hint'.tr,
