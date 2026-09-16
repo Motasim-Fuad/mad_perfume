@@ -100,6 +100,17 @@ const Map<String, String> arSa = {
   'free': 'مجاني',
   'total': 'الإجمالي',
   'secure_checkout': 'دفع آمن',
+  'apply_voucher': 'تطبيق القسيمة',
+  'apply_voucher_copy':
+      'اختر قسيمة خصم غير مستخدمة. تُخصم من المجموع قبل الضريبة، ولا تجعل الإجمالي أقل من صفر.',
+  'no_usable_vouchers':
+      'لا توجد قسائم خصم غير مستخدمة بعد. استبدل مكافأة خصم أولاً ثم عد إلى هنا.',
+  'redeem_for_voucher': 'استبدل قسيمة',
+  'discount': 'الخصم',
+  'voucher_checkout_copy':
+      'طبّق هذه القسيمة عند الدفع لخصم قيمتها من الطلب قبل الضريبة. يمكنك أيضاً عرض الرمز في أحد الفروع.',
+  'used_on_order': 'استُخدمت على %s',
+  'used': 'مستخدمة',
   'use_loyalty_points': 'استخدم نقاط الولاء',
   'points_available': '%s نقطة متاحة',
   'points_discount': 'خصم النقاط',

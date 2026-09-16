@@ -62,6 +62,7 @@ class OrderRepository {
     required String shippingCity,
     String? shippingPhone,
     required String paymentMethod,
+    String? voucherCode,
     String? idempotencyKey,
   }) {
     final key = idempotencyKey ?? _uuid.v4();
@@ -74,6 +75,8 @@ class OrderRepository {
         if (shippingPhone != null && shippingPhone.isNotEmpty)
           'shipping_phone': shippingPhone,
         'payment_method': paymentMethod,
+        if (voucherCode != null && voucherCode.isNotEmpty)
+          'voucher_code': voucherCode,
       },
       headers: {'Idempotency-Key': key},
       parse: (data) => OrderModel.fromJson(_map(data)),

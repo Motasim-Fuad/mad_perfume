@@ -58,8 +58,14 @@ class RedeemedRewardsPage extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     subtitle: Text(
-                      '${reward.points} pts · ${reward.voucherCode}\n'
-                      '${'status'.tr}: ${reward.status.tr}',
+                      [
+                        '${reward.points} pts · ${reward.voucherCode}',
+                        if (reward.resolvedDiscount > 0)
+                          '${'discount'.tr}: \$${reward.resolvedDiscount.toStringAsFixed(2)}',
+                        '${'status'.tr}: ${reward.status.tr}',
+                        if (reward.usedOnOrder != null)
+                          'used_on_order'.trArgs([reward.usedOnOrder!]),
+                      ].join('\n'),
                     ),
                     isThreeLine: true,
                   ),

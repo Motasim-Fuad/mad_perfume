@@ -64,6 +64,8 @@ class OrderDetailsPage extends StatelessWidget {
                 ),
                 const Divider(),
                 AmountRow(label: 'subtotal'.tr, value: order.subtotal),
+                if (order.discount > 0)
+                  AmountRow(label: 'discount'.tr, value: order.discount),
                 AmountRow(label: 'taxes'.tr, value: order.tax),
                 AmountRow(label: 'total'.tr, value: order.total, bold: true),
               ],

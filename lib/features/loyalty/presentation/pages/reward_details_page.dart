@@ -77,6 +77,16 @@ class RewardDetailsPage extends StatelessWidget {
                     color: AppColors.inkSoft,
                   ),
                 ),
+                if (reward.isCheckoutVoucher) ...[
+                  const SizedBox(height: 10),
+                  Text(
+                    'voucher_checkout_copy'.tr,
+                    style: GoogleFonts.dmSans(
+                      color: AppColors.muted,
+                      height: 1.45,
+                    ),
+                  ),
+                ],
                 const SizedBox(height: 16),
                 Text(
                   reward.eligibility,
@@ -106,7 +116,10 @@ class RewardDetailsPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          'reward_claim_copy'.tr,
+                          (reward.isCheckoutVoucher ||
+                                  voucher.isCheckoutVoucher)
+                              ? 'voucher_checkout_copy'.tr
+                              : 'reward_claim_copy'.tr,
                           style: GoogleFonts.dmSans(
                             color: AppColors.inkSoft,
                             height: 1.45,

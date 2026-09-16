@@ -103,6 +103,17 @@ const Map<String, String> enUs = {
   'free': 'Free',
   'total': 'Total',
   'secure_checkout': 'SECURE CHECKOUT',
+  'apply_voucher': 'Apply voucher',
+  'apply_voucher_copy':
+      'Choose an unused discount voucher. It comes off your subtotal before tax, and never takes the total below zero.',
+  'no_usable_vouchers':
+      'No unused discount vouchers yet. Redeem a money-off reward first, then return here.',
+  'redeem_for_voucher': 'REDEEM A VOUCHER',
+  'discount': 'Discount',
+  'voucher_checkout_copy':
+      'Apply this voucher at checkout to take its value off your order before tax. You can also show the code in a boutique.',
+  'used_on_order': 'Used on %s',
+  'used': 'Used',
   'use_loyalty_points': 'Use loyalty points',
   'points_available': '%s pts available',
   'points_discount': 'Points discount',

@@ -126,6 +126,7 @@ class RewardModel {
     required this.description,
     required this.imageUrl,
     required this.canRedeem,
+    this.discountAmount = 0,
   });
 
   final int id;
@@ -136,6 +137,9 @@ class RewardModel {
   final String description;
   final String imageUrl;
   final bool canRedeem;
+  final double discountAmount;
+
+  bool get isCheckoutVoucher => discountAmount > 0;
 
   factory RewardModel.fromJson(Map<String, dynamic> json) {
     return RewardModel(
@@ -147,6 +151,7 @@ class RewardModel {
       description: JsonRead.text(json['description']),
       imageUrl: JsonRead.text(json['image_url']),
       canRedeem: JsonRead.flag(json['can_redeem']),
+      discountAmount: JsonRead.money(json['discount_amount']),
     );
   }
 }
@@ -162,6 +167,8 @@ class RedemptionModel {
     required this.status,
     required this.createdAt,
     this.fulfilledAt,
+    this.discountAmount = 0,
+    this.usedOnOrder,
   });
 
   final int id;
@@ -173,8 +180,40 @@ class RedemptionModel {
   final String status;
   final String createdAt;
   final String? fulfilledAt;
+  final double discountAmount;
+  final String? usedOnOrder;
+
+  bool get isUnused =>
+      status != 'used' && status != 'delivered' && usedOnOrder == null;
+
+  double get resolvedDiscount {
+    if (discountAmount > 0) {
+      return discountAmount;
+    }
+    final match = RegExp(r'\$(\d+(?:\.\d+)?)').firstMatch(name);
+    return match == null ? 0 : double.tryParse(match.group(1)!) ?? 0;
+  }
+
+  bool get isCheckoutVoucher => resolvedDiscount > 0;
+
+  RedemptionModel copyWith({double? discountAmount}) {
+    return RedemptionModel(
+      id: id,
+      voucherCode: voucherCode,
+      reward: reward,
+      name: name,
+      imageUrl: imageUrl,
+      points: points,
+      status: status,
+      createdAt: createdAt,
+      fulfilledAt: fulfilledAt,
+      discountAmount: discountAmount ?? this.discountAmount,
+      usedOnOrder: usedOnOrder,
+    );
+  }
 
   factory RedemptionModel.fromJson(Map<String, dynamic> json) {
+    final used = json['used_on_order']?.toString();
     return RedemptionModel(
       id: JsonRead.integer(json['id']),
       voucherCode: JsonRead.text(json['voucher_code']),
@@ -185,6 +224,8 @@ class RedemptionModel {
       status: JsonRead.text(json['status']),
       createdAt: JsonRead.text(json['created_at']),
       fulfilledAt: json['fulfilled_at']?.toString(),
+      discountAmount: JsonRead.money(json['discount_amount']),
+      usedOnOrder: used == null || used.isEmpty || used == 'null' ? null : used,
     );
   }
 }

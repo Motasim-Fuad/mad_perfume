@@ -52,7 +52,12 @@ void setupLocator() {
   sl.registerFactory(() => PrefsCubit(sl()));
   sl.registerFactory(() => SecurityCubit(sl(), sl()));
   sl.registerFactory(
-    () => CheckoutCubit(sl(), sl<CartCubit>(), sl<AuthCubit>().state.profile),
+    () => CheckoutCubit(
+      sl(),
+      sl<CartCubit>(),
+      sl(),
+      sl<AuthCubit>().state.profile,
+    ),
   );
   sl.registerFactory(
     () => EditProfileCubit(sl<AuthCubit>(), sl<AuthCubit>().state.profile!),

@@ -8,11 +8,13 @@ class PayTile extends StatelessWidget {
     required this.label,
     required this.selected,
     required this.onTap,
+    this.trailing,
   });
 
   final String label;
   final bool selected;
   final VoidCallback onTap;
+  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +43,7 @@ class PayTile extends StatelessWidget {
                 style: GoogleFonts.dmSans(fontWeight: FontWeight.w600),
               ),
             ),
+            if (trailing != null) ...[const SizedBox(width: 8), trailing!],
           ],
         ),
       ),

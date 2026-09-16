@@ -127,6 +127,7 @@ class OrderModel {
     required this.items,
     required this.events,
     required this.subtotal,
+    this.discount = 0,
     required this.tax,
     required this.shippingFee,
     required this.total,
@@ -145,6 +146,7 @@ class OrderModel {
   final List<OrderItemModel> items;
   final List<OrderEventModel> events;
   final double subtotal;
+  final double discount;
   final double tax;
   final double shippingFee;
   final double total;
@@ -183,6 +185,7 @@ class OrderModel {
       items: items,
       events: events,
       subtotal: JsonRead.money(json['subtotal']),
+      discount: JsonRead.money(json['discount']),
       tax: JsonRead.money(json['tax']),
       shippingFee: JsonRead.money(json['shipping_fee']),
       total: JsonRead.money(json['total']),

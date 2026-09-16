@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:madperfume/core/constants/app_colors.dart';
-import 'package:madperfume/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:madperfume/features/commerce/presentation/cubit/checkout_cubit.dart';
 import 'package:madperfume/features/cart/presentation/widgets/checkout_summary.dart';
+import 'package:madperfume/features/cart/presentation/widgets/checkout_voucher_picker.dart';
 import 'package:madperfume/features/cart/presentation/widgets/pay_tile.dart';
 import 'package:madperfume/shared/widgets/app_field.dart';
 import 'package:madperfume/shared/widgets/brand_chrome.dart';
@@ -21,7 +21,7 @@ class CheckoutPage extends StatelessWidget {
       padding: EdgeInsets.zero,
       header: const BrandHeader(showBack: true),
       child: RefreshIndicator.adaptive(
-        onRefresh: context.read<CartCubit>().load,
+        onRefresh: controller.refreshAll,
         child: ListView(
           physics: const AlwaysScrollableScrollPhysics(),
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
@@ -88,6 +88,8 @@ class CheckoutPage extends StatelessWidget {
                 ],
               ),
             ),
+            const SizedBox(height: 22),
+            const CheckoutVoucherPicker(),
             const SizedBox(height: 8),
             const CheckoutSummary(),
             const SizedBox(height: 18),

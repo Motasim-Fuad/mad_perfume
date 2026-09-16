@@ -21,6 +21,8 @@ class ApiException implements Exception {
     map.forEach((key, value) {
       if (value is List) {
         fields[key] = value.map((item) => item.toString()).toList();
+      } else if (key != 'detail' && value is String && value.isNotEmpty) {
+        fields[key] = [value];
       }
     });
     final rawDetail = map['detail'];

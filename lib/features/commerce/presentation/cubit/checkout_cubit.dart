@@ -6,8 +6,11 @@ import 'package:madperfume/config/routes/app_routes.dart';
 import 'package:madperfume/core/error/api_exception.dart';
 import 'package:madperfume/core/models/catalog_models.dart';
 import 'package:madperfume/core/models/commerce_models.dart';
+import 'package:madperfume/core/models/loyalty_models.dart';
+import 'package:madperfume/core/network/paginated.dart';
 import 'package:madperfume/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:madperfume/features/commerce/data/commerce_repository.dart';
+import 'package:madperfume/features/loyalty/data/loyalty_repository.dart';
 import 'package:madperfume/features/orders/data/reviewed_product_store.dart';
 import 'package:uuid/uuid.dart';
 
@@ -16,34 +19,67 @@ class CheckoutState extends Equatable {
     this.useCard = false,
     this.loading = false,
     this.error = '',
+    this.vouchers = const [],
+    this.vouchersLoading = false,
+    this.voucherError = '',
+    this.selectedVoucher,
   });
 
   final bool useCard;
   final bool loading;
   final String error;
+  final List<RedemptionModel> vouchers;
+  final bool vouchersLoading;
+  final String voucherError;
+  final RedemptionModel? selectedVoucher;
 
-  CheckoutState copyWith({bool? useCard, bool? loading, String? error}) {
+  CheckoutState copyWith({
+    bool? useCard,
+    bool? loading,
+    String? error,
+    List<RedemptionModel>? vouchers,
+    bool? vouchersLoading,
+    String? voucherError,
+    RedemptionModel? selectedVoucher,
+    bool clearVoucher = false,
+  }) {
     return CheckoutState(
       useCard: useCard ?? this.useCard,
       loading: loading ?? this.loading,
       error: error ?? this.error,
+      vouchers: vouchers ?? this.vouchers,
+      vouchersLoading: vouchersLoading ?? this.vouchersLoading,
+      voucherError: voucherError ?? this.voucherError,
+      selectedVoucher: clearVoucher
+          ? null
+          : (selectedVoucher ?? this.selectedVoucher),
     );
   }
 
   @override
-  List<Object?> get props => [useCard, loading, error];
+  List<Object?> get props => [
+    useCard,
+    loading,
+    error,
+    vouchers,
+    vouchersLoading,
+    voucherError,
+    selectedVoucher?.voucherCode,
+  ];
 }
 
 class CheckoutCubit extends Cubit<CheckoutState> {
-  CheckoutCubit(this._orders, this._cart, this.profile)
+  CheckoutCubit(this._orders, this._cart, this._loyalty, this.profile)
     : super(const CheckoutState()) {
     name.text = profile?.fullName ?? '';
     address.text = profile?.shippingAddress ?? '';
     phone.text = profile?.phone ?? '';
+    loadVouchers();
   }
 
   final OrderRepository _orders;
   final CartCubit _cart;
+  final LoyaltyRepository _loyalty;
   final ProfileModel? profile;
   final name = TextEditingController();
   final address = TextEditingController();
@@ -52,6 +88,96 @@ class CheckoutCubit extends Cubit<CheckoutState> {
   String? _idempotencyKey;
 
   void setCard(bool value) => emit(state.copyWith(useCard: value, error: ''));
+
+  void selectVoucher(RedemptionModel? voucher) {
+    final same = voucher?.voucherCode == state.selectedVoucher?.voucherCode;
+    _idempotencyKey = null;
+    emit(
+      state.copyWith(
+        selectedVoucher: voucher,
+        clearVoucher: voucher == null || same,
+        error: '',
+      ),
+    );
+  }
+
+  Future<void> refreshAll() async {
+    await Future.wait([_cart.load(), loadVouchers()]);
+  }
+
+  Future<void> loadVouchers() async {
+    emit(state.copyWith(vouchersLoading: true, voucherError: ''));
+    try {
+      final walletAndRewards = await Future.wait([
+        _loyalty.redemptions(),
+        _loyalty.rewards(),
+      ]);
+      var usable = <RedemptionModel>[];
+      try {
+        usable = (await _loyalty.redemptions(usable: true)).results;
+      } on ApiException {
+        usable = const [];
+      }
+      if (isClosed) {
+        return;
+      }
+      final wallet =
+          (walletAndRewards[0] as Paginated<RedemptionModel>).results;
+      final rewards = walletAndRewards[1] as List<RewardModel>;
+      final byReward = {for (final reward in rewards) reward.id: reward};
+      final vouchers = _checkoutVouchers(
+        usable: usable,
+        wallet: wallet,
+        byReward: byReward,
+      );
+      final selected = state.selectedVoucher;
+      final stillThere =
+          selected != null &&
+          vouchers.any((item) => item.voucherCode == selected.voucherCode);
+      emit(
+        state.copyWith(
+          vouchers: vouchers,
+          vouchersLoading: false,
+          voucherError: '',
+          selectedVoucher: stillThere ? selected : null,
+          clearVoucher: !stillThere,
+        ),
+      );
+    } on ApiException catch (error) {
+      if (isClosed) {
+        return;
+      }
+      emit(state.copyWith(vouchersLoading: false, voucherError: error.message));
+    }
+  }
+
+  List<RedemptionModel> _checkoutVouchers({
+    required List<RedemptionModel> usable,
+    required List<RedemptionModel> wallet,
+    required Map<int, RewardModel> byReward,
+  }) {
+    final merged = <String, RedemptionModel>{};
+    for (final item in [...usable, ...wallet]) {
+      if (!item.isUnused) {
+        continue;
+      }
+      final reward = byReward[item.reward];
+      final amount = item.resolvedDiscount > 0
+          ? item.resolvedDiscount
+          : (reward?.discountAmount ?? 0);
+      final checkoutVoucher =
+          amount > 0 ||
+          (reward?.isCheckoutVoucher ?? false) ||
+          item.name.toLowerCase().contains('voucher');
+      if (!checkoutVoucher) {
+        continue;
+      }
+      merged[item.voucherCode] = item.copyWith(
+        discountAmount: amount > 0 ? amount : item.discountAmount,
+      );
+    }
+    return merged.values.toList();
+  }
 
   Future<void> place() async {
     if (name.text.trim().isEmpty ||
@@ -73,12 +199,19 @@ class CheckoutCubit extends Cubit<CheckoutState> {
         shippingCity: city.text.trim(),
         shippingPhone: phone.text.trim(),
         paymentMethod: state.useCard ? 'card' : 'cod',
+        voucherCode: state.selectedVoucher?.voucherCode,
         idempotencyKey: _idempotencyKey,
       );
       await _cart.load(silent: true);
+      if (isClosed) {
+        return;
+      }
       emit(state.copyWith(loading: false));
       Get.offNamed(AppRoutes.orderSuccess, arguments: order.id);
     } on ApiException catch (error) {
+      if (isClosed) {
+        return;
+      }
       emit(state.copyWith(loading: false, error: error.message));
     }
   }

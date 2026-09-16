@@ -60,10 +60,13 @@ class LoyaltyRepository {
     );
   }
 
-  Future<Paginated<RedemptionModel>> redemptions({int page = 1}) {
+  Future<Paginated<RedemptionModel>> redemptions({
+    int page = 1,
+    bool usable = false,
+  }) {
     return _api.get(
       ApiEndpoints.redemptions,
-      query: {'page': page},
+      query: {'page': page, if (usable) 'usable': 'true'},
       parse: (data) => Paginated.fromJson(_map(data), RedemptionModel.fromJson),
     );
   }

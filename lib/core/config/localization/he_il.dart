@@ -100,6 +100,17 @@ const Map<String, String> heIl = {
   'free': 'חינם',
   'total': 'סה״כ',
   'secure_checkout': 'תשלום מאובטח',
+  'apply_voucher': 'החלת שובר',
+  'apply_voucher_copy':
+      'בחרו שובר הנחה שלא נוצל. הוא יורד מהסכום לפני מס, ואינו מוריד את הסה״כ מתחת לאפס.',
+  'no_usable_vouchers':
+      'אין עדיין שוברי הנחה פנויים. מימשו תגמול הנחה ואז חזרו לכאן.',
+  'redeem_for_voucher': 'מימוש שובר',
+  'discount': 'הנחה',
+  'voucher_checkout_copy':
+      'החילו את השובר בקופה כדי להוריד את ערכו מההזמנה לפני מס. אפשר גם להציג את הקוד בבוטיק.',
+  'used_on_order': 'נוצל בהזמנה %s',
+  'used': 'נוצל',
   'use_loyalty_points': 'שימוש בנקודות נאמנות',
   'points_available': '%s נקודות זמינות',
   'points_discount': 'הנחת נקודות',
