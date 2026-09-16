@@ -29,6 +29,7 @@ class BranchDetailsPage extends StatelessWidget {
               loading: state.loading,
               error: state.error,
               onRetry: controller.load,
+              onRefresh: controller.load,
               child: ListView(
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
                 children: [

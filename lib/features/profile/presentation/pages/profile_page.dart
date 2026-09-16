@@ -27,6 +27,7 @@ class ProfilePage extends StatelessWidget {
             loading: state.loading,
             error: state.error,
             onRetry: controller.load,
+            onRefresh: controller.load,
             child: ListView(
               padding: EdgeInsets.fromLTRB(
                 20,

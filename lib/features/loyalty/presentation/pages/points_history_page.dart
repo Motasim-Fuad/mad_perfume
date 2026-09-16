@@ -55,6 +55,7 @@ class PointsHistoryPage extends StatelessWidget {
                   error: state.error,
                   empty: items.isEmpty,
                   onRetry: () => controller.load(filter: state.filter),
+                  onRefresh: () => controller.load(filter: state.filter),
                   child: ListView.separated(
                     padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
                     itemCount: items.length,

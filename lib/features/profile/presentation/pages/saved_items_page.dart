@@ -33,6 +33,7 @@ class SavedItemsPage extends StatelessWidget {
                 empty: items.isEmpty,
                 emptyMessage: 'empty_saved'.tr,
                 onRetry: context.read<SavedCubit>().load,
+                onRefresh: context.read<SavedCubit>().load,
                 child: ListView.separated(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
                   itemCount: items.length,

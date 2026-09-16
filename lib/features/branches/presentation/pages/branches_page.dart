@@ -76,6 +76,8 @@ class BranchesPage extends StatelessWidget {
                   error: state.error,
                   empty: items.isEmpty,
                   emptyMessage: 'no_results'.tr,
+                  onRetry: () => controller.searchNow(state.query),
+                  onRefresh: () => controller.searchNow(state.query),
                   child: ListView.separated(
                     padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
                     itemCount: items.length,

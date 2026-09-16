@@ -24,49 +24,47 @@ class RedeemedRewardsPage extends StatelessWidget {
             error: state.error,
             empty: state.items.isEmpty,
             emptyMessage: 'empty_rewards'.tr,
-            child: RefreshIndicator(
-              onRefresh: controller.load,
-              child: ListView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
-                children: [
-                  Text(
-                    'your_exclusive'.tr,
-                    style: GoogleFonts.cormorantGaramond(
-                      fontSize: 28,
-                      fontWeight: FontWeight.w600,
+            onRetry: controller.load,
+            onRefresh: controller.load,
+            child: ListView(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+              children: [
+                Text(
+                  'your_exclusive'.tr,
+                  style: GoogleFonts.cormorantGaramond(
+                    fontSize: 28,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                Text(
+                  'reward_claim_copy'.tr,
+                  style: GoogleFonts.dmSans(fontSize: 13, height: 1.45),
+                ),
+                const SizedBox(height: 12),
+                ...state.items.map(
+                  (reward) => ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: SizedBox(
+                        width: 52,
+                        height: 52,
+                        child: RemoteImage(url: reward.imageUrl),
+                      ),
                     ),
-                  ),
-                  Text(
-                    'reward_claim_copy'.tr,
-                    style: GoogleFonts.dmSans(fontSize: 13, height: 1.45),
-                  ),
-                  const SizedBox(height: 12),
-                  ...state.items.map(
-                    (reward) => ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      leading: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: SizedBox(
-                          width: 52,
-                          height: 52,
-                          child: RemoteImage(url: reward.imageUrl),
-                        ),
-                      ),
-                      title: Text(
-                        reward.name,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      subtitle: Text(
-                        '${reward.points} pts · ${reward.voucherCode}\n'
-                        '${'status'.tr}: ${reward.status.tr}',
-                      ),
-                      isThreeLine: true,
+                    title: Text(
+                      reward.name,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
+                    subtitle: Text(
+                      '${reward.points} pts · ${reward.voucherCode}\n'
+                      '${'status'.tr}: ${reward.status.tr}',
+                    ),
+                    isThreeLine: true,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           );
         },

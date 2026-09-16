@@ -14,6 +14,7 @@ class QueryBody extends StatelessWidget {
     this.empty = false,
     this.emptyMessage,
     this.onRetry,
+    this.onRefresh,
   });
 
   final bool loading;
@@ -21,14 +22,17 @@ class QueryBody extends StatelessWidget {
   final bool empty;
   final String? emptyMessage;
   final VoidCallback? onRetry;
+  final Future<void> Function()? onRefresh;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     Widget body;
+    var staticBody = false;
     if (loading) {
       body = const ShimmerLoadingList();
     } else if (error.isNotEmpty) {
+      staticBody = true;
       body = Center(
         key: const ValueKey('query-error'),
         child: Padding(
@@ -50,6 +54,7 @@ class QueryBody extends StatelessWidget {
         ),
       );
     } else if (empty) {
+      staticBody = true;
       body = EmptyWidget(
         key: const ValueKey('query-empty'),
         message: emptyMessage ?? 'no_results'.tr,
@@ -57,11 +62,45 @@ class QueryBody extends StatelessWidget {
     } else {
       body = KeyedSubtree(key: const ValueKey('query-content'), child: child);
     }
+    if (!loading && onRefresh != null) {
+      final currentBody = body;
+      body = staticBody
+          ? LayoutBuilder(
+              builder: (context, constraints) => RefreshIndicator.adaptive(
+                onRefresh: onRefresh!,
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: constraints.maxHeight,
+                    ),
+                    child: currentBody,
+                  ),
+                ),
+              ),
+            )
+          : RefreshIndicator.adaptive(
+              onRefresh: onRefresh!,
+              child: ScrollConfiguration(
+                behavior: const _AlwaysScrollableBehavior(),
+                child: currentBody,
+              ),
+            );
+    }
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 360),
       switchInCurve: Curves.easeOutCubic,
       switchOutCurve: Curves.easeInCubic,
       child: body,
     );
+  }
+}
+
+class _AlwaysScrollableBehavior extends MaterialScrollBehavior {
+  const _AlwaysScrollableBehavior();
+
+  @override
+  ScrollPhysics getScrollPhysics(BuildContext context) {
+    return AlwaysScrollableScrollPhysics(parent: super.getScrollPhysics(context));
   }
 }

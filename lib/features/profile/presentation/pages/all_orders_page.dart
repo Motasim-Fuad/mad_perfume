@@ -24,6 +24,7 @@ class AllOrdersPage extends StatelessWidget {
             empty: orders.isEmpty,
             emptyMessage: 'empty_orders'.tr,
             onRetry: context.read<OrdersCubit>().load,
+            onRefresh: context.read<OrdersCubit>().load,
             child: ListView.separated(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
               itemCount: orders.length,

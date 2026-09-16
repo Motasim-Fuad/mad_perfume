@@ -53,6 +53,8 @@ class SearchPage extends StatelessWidget {
                 error: state.error,
                 empty: state.items.isEmpty,
                 emptyMessage: 'no_results'.tr,
+                onRetry: () => controller.searchNow(state.query),
+                onRefresh: () => controller.searchNow(state.query),
                 child: ListView.separated(
                   padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
                   itemCount: state.items.length,

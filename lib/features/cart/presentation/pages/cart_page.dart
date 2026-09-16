@@ -38,6 +38,7 @@ class _CartPageState extends State<CartPage> {
             loading: state.loading,
             error: state.error,
             onRetry: controller.load,
+            onRefresh: controller.load,
             child: Column(
               children: [
                 Padding(
@@ -79,8 +80,17 @@ class _CartPageState extends State<CartPage> {
                 ),
                 Expanded(
                   child: items.isEmpty
-                      ? EmptyWidget(message: 'empty_cart'.tr)
+                      ? ListView(
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          children: [
+                            SizedBox(
+                              height: MediaQuery.sizeOf(context).height * 0.35,
+                              child: EmptyWidget(message: 'empty_cart'.tr),
+                            ),
+                          ],
+                        )
                       : ListView.separated(
+                          physics: const AlwaysScrollableScrollPhysics(),
                           padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
                           itemCount: items.length,
                           separatorBuilder: (context, index) =>

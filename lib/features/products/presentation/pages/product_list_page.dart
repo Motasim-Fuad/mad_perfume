@@ -89,6 +89,7 @@ class ProductListPage extends StatelessWidget {
                 empty: state.items.isEmpty,
                 emptyMessage: 'no_results'.tr,
                 onRetry: controller.load,
+                onRefresh: controller.load,
                 child: ListView.separated(
                   padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
                   itemCount: state.items.length,

@@ -247,14 +247,16 @@ class BranchesState extends Equatable {
     this.items = const [],
     this.loading = true,
     this.error = '',
+    this.query = '',
   });
 
   final List<BranchModel> items;
   final bool loading;
   final String error;
+  final String query;
 
   @override
-  List<Object?> get props => [items, loading, error];
+  List<Object?> get props => [items, loading, error, query];
 }
 
 class BranchesCubit extends Cubit<BranchesState> {
@@ -280,17 +282,29 @@ class BranchesCubit extends Cubit<BranchesState> {
   }
 
   Future<void> _load(String query, int generation) async {
-    emit(const BranchesState(loading: true));
+    emit(BranchesState(loading: true, query: query));
     try {
       final page = await _catalog.branches(
         search: query.trim().isEmpty ? null : query.trim(),
       );
       if (generation == _generation) {
-        emit(BranchesState(items: page.results, loading: false));
+        emit(
+          BranchesState(
+            items: page.results,
+            loading: false,
+            query: query,
+          ),
+        );
       }
     } on ApiException catch (error) {
       if (generation == _generation) {
-        emit(BranchesState(loading: false, error: error.message));
+        emit(
+          BranchesState(
+            loading: false,
+            error: error.message,
+            query: query,
+          ),
+        );
       }
     }
   }

@@ -59,6 +59,7 @@ class NotificationsPage extends StatelessWidget {
                   error: state.error,
                   empty: items.isEmpty,
                   onRetry: () => controller.load(category: state.category),
+                  onRefresh: () => controller.load(category: state.category),
                   child: ListView.separated(
                     padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
                     itemCount: items.length,

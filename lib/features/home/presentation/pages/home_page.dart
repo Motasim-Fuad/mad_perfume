@@ -27,6 +27,7 @@ class HomePage extends StatelessWidget {
           loading: state.loading,
           error: state.error,
           onRetry: controller.load,
+          onRefresh: controller.load,
           child: CustomScrollView(
             slivers: [
               const SliverToBoxAdapter(child: HomeTopBar()),
