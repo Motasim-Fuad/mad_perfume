@@ -1,17 +1,39 @@
-# madperfume
+# MAD Parfumeur
 
-A new Flutter project.
+Luxury perfume shopping — collections, cart, loyalty, and boutique discovery.
 
-## Getting Started
+<p align="center">
+  <img src="docs/readme/mockup.jpg" alt="MAD Parfumeur app mockup" width="920">
+</p>
 
-This project is a starting point for a Flutter application.
+<p align="center">
+  <img src="docs/readme/gallery.jpg" alt="App screens gallery" width="920">
+</p>
 
-A few resources to get you started if this is your first Flutter project:
+## Screens
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+<p align="center">
+  <img src="docs/readme/01-home.jpg" alt="Home" width="160">
+  <img src="docs/readme/02-collections.jpg" alt="Collections" width="160">
+  <img src="docs/readme/03-cart.png" alt="Cart" width="160">
+  <img src="docs/readme/04-checkout.png" alt="Checkout" width="160">
+  <img src="docs/readme/05-loyalty.png" alt="Loyalty" width="160">
+  <img src="docs/readme/06-profile.png" alt="Profile" width="160">
+  <img src="docs/readme/07-tracking.png" alt="Order tracking" width="160">
+</p>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Highlights
+
+- Home hero, olfactory collections, and featured scents
+- Cart, checkout, loyalty points, and order tracking
+- English, Arabic, and Hebrew with RTL
+- Flutter + GetX
+
+## Run
+
+```bash
+flutter pub get
+flutter run
+```
+
+Demo: `name@example.com` / `123456`
