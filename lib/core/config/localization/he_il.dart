@@ -265,5 +265,5 @@ const Map<String, String> heIl = {
   'order_placed': 'ההזמנה נוצרה',
   'estimated_arrival': 'הגעה משוערת',
   'complimentary': 'על חשבון הבית',
-  "out_of_stock": "מצטערים, המוצר הזה אינו זמין כרגע במלאי"
+  'out_of_stock': 'מצטערים, המוצר אינו במלאי כרגע.',
 };

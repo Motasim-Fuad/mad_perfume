@@ -11,22 +11,30 @@ class CartState extends Equatable {
     this.cart = CartModel.empty,
     this.loading = false,
     this.error = '',
+    this.actionError,
   });
 
   final CartModel cart;
   final bool loading;
   final String error;
+  final String? actionError;
 
-  CartState copyWith({CartModel? cart, bool? loading, String? error}) {
+  CartState copyWith({
+    CartModel? cart,
+    bool? loading,
+    String? error,
+    String? actionError,
+  }) {
     return CartState(
       cart: cart ?? this.cart,
       loading: loading ?? this.loading,
       error: error ?? this.error,
+      actionError: actionError,
     );
   }
 
   @override
-  List<Object?> get props => [cart, loading, error];
+  List<Object?> get props => [cart, loading, error, actionError];
 }
 
 class CartCubit extends Cubit<CartState> {
@@ -66,7 +74,15 @@ class CartCubit extends Cubit<CartState> {
       await _repository.setQuantity(itemId: itemId, quantity: quantity);
       await load(silent: true);
     } on ApiException catch (error) {
-      emit(state.copyWith(error: error.message));
+      // Backend already sends this message localized (based on the
+      // request's locale/Accept-Language) — show it exactly as received.
+      emit(state.copyWith(actionError: error.message));
+    }
+  }
+
+  void clearActionError() {
+    if (state.actionError != null) {
+      emit(state.copyWith(actionError: null));
     }
   }
 

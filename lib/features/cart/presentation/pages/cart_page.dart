@@ -31,7 +31,21 @@ class _CartPageState extends State<CartPage> {
     final controller = context.read<CartCubit>();
     return SafeArea(
       bottom: false,
-      child: BlocBuilder<CartCubit, CartState>(
+      child: BlocConsumer<CartCubit, CartState>(
+        listener: (context, state) {
+          if (state.actionError != null && state.actionError!.isNotEmpty) {
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                SnackBar(
+                  content: Text(state.actionError!),
+                  behavior: SnackBarBehavior.floating,
+                  duration: const Duration(seconds: 2),
+                ),
+              );
+            controller.clearActionError();
+          }
+        },
         builder: (context, state) {
           final items = state.cart.items;
           return QueryBody(
@@ -81,23 +95,23 @@ class _CartPageState extends State<CartPage> {
                 Expanded(
                   child: items.isEmpty
                       ? ListView(
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          children: [
-                            SizedBox(
-                              height: MediaQuery.sizeOf(context).height * 0.35,
-                              child: EmptyWidget(message: 'empty_cart'.tr),
-                            ),
-                          ],
-                        )
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.sizeOf(context).height * 0.35,
+                        child: EmptyWidget(message: 'empty_cart'.tr),
+                      ),
+                    ],
+                  )
                       : ListView.separated(
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
-                          itemCount: items.length,
-                          separatorBuilder: (context, index) =>
-                              const Divider(height: 28),
-                          itemBuilder: (context, index) =>
-                              CartLineItem(item: items[index]),
-                        ),
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
+                    itemCount: items.length,
+                    separatorBuilder: (context, index) =>
+                    const Divider(height: 28),
+                    itemBuilder: (context, index) =>
+                        CartLineItem(item: items[index]),
+                  ),
                 ),
                 ColoredBox(
                   color: AppColors.background,
