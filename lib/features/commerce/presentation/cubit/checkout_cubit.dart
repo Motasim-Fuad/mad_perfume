@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:madperfume/config/routes/app_routes.dart';
+import 'package:madperfume/core/constants/app_colors.dart';
 import 'package:madperfume/core/error/api_exception.dart';
 import 'package:madperfume/core/models/catalog_models.dart';
 import 'package:madperfume/core/models/commerce_models.dart';
@@ -209,6 +210,17 @@ class CheckoutCubit extends Cubit<CheckoutState> {
             paymentSheetParameters: SetupPaymentSheetParameters(
               paymentIntentClientSecret: order.clientSecret!,
               merchantDisplayName: 'MAD Perfume',
+              appearance: PaymentSheetAppearance(
+                colors: PaymentSheetAppearanceColors(primary: AppColors.ink),
+                primaryButton: PaymentSheetPrimaryButtonAppearance(
+                  colors: PaymentSheetPrimaryButtonTheme(
+                    light: PaymentSheetPrimaryButtonThemeColors(
+                      background: AppColors.ink,
+                      text: AppColors.background,
+                    ),
+                  ),
+                ),
+              ),
             ),
           );
           await Stripe.instance.presentPaymentSheet();
