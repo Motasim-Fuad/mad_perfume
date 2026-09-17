@@ -24,7 +24,7 @@ class ProductDetailsPage extends StatelessWidget {
         listenWhen: (before, after) =>
             before.cartAddSuccess != after.cartAddSuccess,
         listener: (context, state) =>
-            AppToast.success(context, 'product_added_successfully'.tr),
+            AppToast.successToast(context, 'product_added_successfully'.tr),
         builder: (context, state) => QueryBody(
           loading: state.loading,
           error: state.error,
@@ -136,7 +136,13 @@ class ProductDetailsPage extends StatelessWidget {
                   label: 'add_to_cart'.tr,
                   loading: state.busy,
                   error: state.actionError,
-                  onPressed: product.inStock ? controller.addToCart : null,
+                  onPressed: () {
+                    if (!product.inStock) {
+                      AppToast.errorToast(context, 'out_of_stock'.tr);
+                      return;
+                    }
+                    controller.addToCart();
+                  },
                 ),
               ],
             ],

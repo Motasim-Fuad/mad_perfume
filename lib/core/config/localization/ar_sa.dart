@@ -269,4 +269,5 @@ const Map<String, String> arSa = {
   'order_placed': 'تم إنشاء الطلب',
   'estimated_arrival': 'الوصول المتوقع',
   'complimentary': 'مجاني',
+  "out_of_stock": "عذرًا، هذا المنتج غير متوفر حاليًا"
 };

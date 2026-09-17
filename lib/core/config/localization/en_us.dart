@@ -276,4 +276,5 @@ const Map<String, String> enUs = {
   'order_placed': 'Order Placed',
   'estimated_arrival': 'Estimated Arrival',
   'complimentary': 'Complimentary',
+  "out_of_stock": "Sorry, this product is currently out of stock"
 };
