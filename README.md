@@ -9,7 +9,7 @@ Luxury perfume shopping — collections, cart, loyalty, and boutique discovery.
 ## Highlights
 
 - Home hero, olfactory collections, and featured scents
-- Cart, checkout, loyalty points, and order tracking
+- Cart, checkout, loyalty points, and order tracking,Stripe
 - English, Arabic, and Hebrew with RTL
 - Flutter + BLoC, Dio, get_it, and GetX routing/localization
 - Real staging backend integration with rotating JWT authentication
