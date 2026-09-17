@@ -13,6 +13,7 @@ import 'package:madperfume/features/commerce/data/commerce_repository.dart';
 import 'package:madperfume/features/loyalty/data/loyalty_repository.dart';
 import 'package:madperfume/features/orders/data/reviewed_product_store.dart';
 import 'package:uuid/uuid.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 
 class CheckoutState extends Equatable {
   const CheckoutState({
@@ -186,10 +187,6 @@ class CheckoutCubit extends Cubit<CheckoutState> {
       emit(state.copyWith(error: 'fill_shipping'.tr));
       return;
     }
-    if (state.useCard) {
-      emit(state.copyWith(error: 'stripe_unavailable'.tr));
-      return;
-    }
     emit(state.copyWith(loading: true, error: ''));
     _idempotencyKey ??= const Uuid().v4();
     try {
@@ -202,6 +199,32 @@ class CheckoutCubit extends Cubit<CheckoutState> {
         voucherCode: state.selectedVoucher?.voucherCode,
         idempotencyKey: _idempotencyKey,
       );
+      if (state.useCard) {
+        if (order.clientSecret == null || order.clientSecret!.isEmpty) {
+          emit(state.copyWith(loading: false, error: 'stripe_unavailable'.tr));
+          return;
+        }
+        try {
+          await Stripe.instance.initPaymentSheet(
+            paymentSheetParameters: SetupPaymentSheetParameters(
+              paymentIntentClientSecret: order.clientSecret!,
+              merchantDisplayName: 'MAD Perfume',
+            ),
+          );
+          await Stripe.instance.presentPaymentSheet();
+        } on StripeException catch (error) {
+          if (isClosed) {
+            return;
+          }
+          emit(
+            state.copyWith(
+              loading: false,
+              error: error.error.localizedMessage ?? 'stripe_unavailable'.tr,
+            ),
+          );
+          return;
+        }
+      }
       await _cart.load(silent: true);
       if (isClosed) {
         return;

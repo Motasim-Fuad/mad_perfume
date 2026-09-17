@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' hide Transition;
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:madperfume/config/routes/app_routes.dart';
@@ -12,16 +13,22 @@ import 'package:madperfume/core/services/locale_service.dart';
 import 'package:madperfume/core/services/storage_service.dart';
 import 'package:madperfume/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:madperfume/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+import 'core/constants/stripe_config.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  await dotenv.load(fileName: '.env');
+  Stripe.publishableKey = StripeConfig.publishableKey;
+  await Stripe.instance.applySettings();
   await GetStorage.init();
   setupLocator();
   final storage = sl<StorageService>();
   Get.put(storage, permanent: true);
   final localeService = await Get.putAsync(
-    () => LocaleService(storage).init(),
+        () => LocaleService(storage).init(),
     permanent: true,
   );
   runApp(MadPerfumeApp(locale: localeService.locale.value));
