@@ -30,7 +30,7 @@ class LanguageSelectorWidget extends StatelessWidget {
           children: [
             Container(
               width: 42,
-              height: 4,
+              height: 5,
               decoration: BoxDecoration(
                 color: AppColors.line,
                 borderRadius: BorderRadius.circular(99),
